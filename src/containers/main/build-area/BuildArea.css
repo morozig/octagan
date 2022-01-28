@@ -1,0 +1,38 @@
+.BuildArea {
+  height:400px;
+  border: 1px solid black;
+}
+
+.BuildArea-controls {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.BuildArea-controls-random {
+  cursor: pointer;
+}
+
+.BuildArea-controls-random--disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.BuildArea-grid {
+  display: grid;
+  grid-template-columns: repeat(8, auto);
+  justify-content: center;
+}
+
+.BuildArea-grid-item {
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+}

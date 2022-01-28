@@ -57,7 +57,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       class={'ScreenArea'}
     >
       <p>
-        {GameStatus[props.gameStatus]}
+        {GameStatus[gameStatus.value]}
       </p>
       <p>
         {`level: ${level.value}`}

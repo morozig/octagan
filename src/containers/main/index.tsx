@@ -2,6 +2,7 @@ import {
   defineComponent,
   ref,
 } from 'vue';
+import BuildArea from './build-area';
 import ControlsArea from './controls-area';
 import ScreenArea from './screen-area';
 
@@ -15,6 +16,7 @@ export enum GameStatus {
 const Main = defineComponent(() => {
   const gameStatus = ref(GameStatus.Stopped);
   const level = ref(1);
+  const build = ref('0'.repeat(64));
 
   const onSwitch = () => {
     if (gameStatus.value === GameStatus.Running) {
@@ -36,6 +38,9 @@ const Main = defineComponent(() => {
   const onFinish = () => {
     gameStatus.value = GameStatus.Finished;
   };
+  const onBuildChange = (newBuild: string) => {
+    build.value = newBuild;
+  };
 
   return () => (
     <>
@@ -48,6 +53,11 @@ const Main = defineComponent(() => {
         gameStatus={gameStatus.value}
         onSwitch={onSwitch}
         onStop={onStop}
+      />
+      <BuildArea
+        build={build.value}
+        onBuildChange={onBuildChange}
+        isDisabled={gameStatus.value !== GameStatus.Stopped}
       />
     </>
   );

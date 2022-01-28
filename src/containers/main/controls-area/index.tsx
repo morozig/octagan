@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  computed,
 } from 'vue';
 import { GameStatus } from '..';
 import './ControlsArea.css';

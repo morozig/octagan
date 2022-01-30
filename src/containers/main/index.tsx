@@ -35,6 +35,10 @@ const Main = defineComponent(() => {
   const onLevelChange = (newLevel: number) => {
     level.value = newLevel;
   };
+  const onFail = () => {
+    gameStatus.value = level.value > 1 ?
+      GameStatus.Paused : GameStatus.Stopped;
+  };
   const onFinish = () => {
     gameStatus.value = GameStatus.Finished;
   };
@@ -48,6 +52,8 @@ const Main = defineComponent(() => {
         gameStatus={gameStatus.value}
         onLevelChange={onLevelChange}
         onFinish={onFinish}
+        onFail={onFail}
+        build={build.value}
       />
       <ControlsArea
         gameStatus={gameStatus.value}

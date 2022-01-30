@@ -34,23 +34,50 @@ export const enum ProjectileStatus {
 }
 
 const scores = [] as number[];
-const keyBuild = new Array(64)
-  .fill(undefined)
-  .map(() => Math.floor(Math.random() * 8));
-const getScore = (build: string, level: number) => {
-  return new Promise<number>(resolve => {
-    setTimeout(() => {
-      const diff = build
-        .split('')
-        .map(curr => +curr)
-        .map((curr, i) => (level === 8 || curr === level || curr === 0) ?
-          Math.abs(curr - keyBuild[i]) : 0
-        )
-        .reduce((total, curr) => total + curr, 0);
-      resolve(1 - diff / 7 / 64);
-    }, 200);
-  });
+let model; // tf.LayersModel;
+const buildToInput = (build: string, level: number) => {
+  const buildArr = build
+    .split('')
+    .map(char => +char);
+  const input = [] as number[][][];
+  for (let i = 0; i < 8; i++) {
+    if (!input[i]) input[i] = [];
+    for (let j = 0; j < 8; j++) {
+      if (!input[i][j]) input[i][j] = [];
+      for (let k = 0; k < 16; k++) {
+        input[i][j][k] = k + 1 === level + 8 ? 1 : 0;
+      }
+    }
+  }
+  for (let index = 0; index < 64; index++) {
+    const i = Math.floor(index / 8);
+    const j = index % 8;
+    const k = buildArr[index] > 0 ?
+      buildArr[index] - 1 : 7;
+    input[i][j][k] = 1;
+  }
+  return input;
 };
+const getScore = async (build: string, level: number) => {
+  const start = new Date().getTime();
+  const tf = await import('@tensorflow/tfjs');
+  const imported = new Date().getTime();
+  console.log('tf imported', imported - start);
+  if (!model) {
+    const requestUrl = `${window.location}model/model.json`;
+    model = await tf.loadLayersModel(requestUrl);
+  }
+  const input = buildToInput(build, level);
+  const inputsTensor = tf.tensor([input]);
+  const outputsTensor = model.predict(inputsTensor);
+  const outputs = await outputsTensor.array() as number[][];
+  console.log({outputs}, new Date().getTime());
+  inputsTensor.dispose();
+  outputsTensor.dispose();
+  const score = outputs[0][0];
+  return score;
+};
+
 const getPlayerDamageSent = (level: number) => {
   let damage = Math.ceil(Math.random() * 20);
   for (let i = 0; i < level; i++) {

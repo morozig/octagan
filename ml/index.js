@@ -5,7 +5,9 @@ const { createHash } = require('crypto');
 const url = require('url');
 
 const buildToInput = (build, level) => {
-  const buildArr = build.split('');
+  const buildArr = build
+    .split('')
+    .map(char => +char);
   const input = [];
   for (let i = 0; i < 8; i++) {
     if (!input[i]) input[i] = [];
@@ -75,7 +77,7 @@ const run = async () => {
   for (let i = 1; i <= 10 ; i++) {
     const inputs = [];
     const outputs = [];
-    while (inputs.length < 100) {
+    while (inputs.length < 100000) {
       const output = Math.random();
       const level = Math.ceil(Math.random() * 8);
       const inputArr = key
@@ -102,15 +104,30 @@ const run = async () => {
       inputsTensor,
       outputsTensor,
       {
-        batchSize: 32,
+        batchSize: 128,
         epochs: 1,
-        validationSplit: 0.1,
+        validationSplit: 0.05,
       }
     );
     inputsTensor.dispose();
     outputsTensor.dispose();
 
-    console.log("Loss after Epoch " + i + " : " + h.history.loss[0]);
+    for (let build of [ key, '0'.repeat(64)]) {
+      const testInputsTensor = tf.tensor(new Array(8)
+        .fill(undefined)
+        .map((_, i) => buildToInput(build, i + 1))
+        .concat()
+      );
+      const testOutputsTensor = model.predict(testInputsTensor);
+      const testOutputs = await testOutputsTensor.array();
+  
+      testInputsTensor.dispose();
+      testOutputsTensor.dispose();
+  
+      console.log(testOutputs);
+    }
+
+    console.log("Loss after Epoch " + i + " : " + h.history.val_loss[0]);
   }
 
   const modelDir = path.resolve(dataDir, 'model');

@@ -6,6 +6,8 @@ import {
 import './BuildArea.css';
 import Gem from './Gem';
 
+const buildLocalStorageKey = 'build';
+
 interface BuildAreaProps {
   build: string;
   onBuildChange: (build: string) => void;
@@ -28,6 +30,17 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
       .map(() => Math.floor(Math.random() * 8))
       .join('');
     props.onBuildChange(build);
+  };
+
+  const onSaveClick = () => {
+    localStorage.setItem(buildLocalStorageKey, props.build);
+  };
+
+  const onLoadClick = () => {
+    const build = localStorage.getItem(buildLocalStorageKey);
+    if (build) {
+      props.onBuildChange(build);
+    }
   };
 
   const controlsClass = computed(() => 'BuildArea-controls '.concat(
@@ -85,6 +98,16 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
           onClick={onRandomClick}
         >
           {'Random'}
+        </button>
+        <button
+          onClick={onSaveClick}
+        >
+          {'Save'}
+        </button>
+        <button
+          onClick={onLoadClick}
+        >
+          {'Load'}
         </button>
       </div>
       <div

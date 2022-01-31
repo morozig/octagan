@@ -2,6 +2,8 @@ import {
   defineComponent,
   computed,
   ref,
+  watch,
+  toRefs,
 } from 'vue';
 import './BuildArea.css';
 import Gem from './Gem';
@@ -15,6 +17,9 @@ interface BuildAreaProps {
 }
 
 const BuildArea = defineComponent<BuildAreaProps>((props) => {
+  const {
+    isDisabled
+  } = toRefs(props);
   const colorSelected = ref<number>(undefined);
 
   const onClearClick = () => {
@@ -43,8 +48,12 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
     }
   };
 
+  watch(isDisabled, () => {
+    colorSelected.value = undefined;
+  });
+
   const controlsClass = computed(() => 'BuildArea-controls '.concat(
-    props.isDisabled ? 'BuildArea-controls--disabled ' : '',
+    isDisabled.value ? 'BuildArea-controls--disabled ' : '',
   ));
 
   return () => (

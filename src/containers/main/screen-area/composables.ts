@@ -74,30 +74,19 @@ const getScore = async (build: string, level: number) => {
   inputsTensor.dispose();
   outputsTensor.dispose();
   const score = outputs[0][0];
-  console.log({score});
   return score;
 };
 
 const getPlayerDamageSent = (level: number) => {
   let damage = Math.ceil(Math.random() * 20);
-  for (let i = 0; i < level; i++) {
-    const multiplier = i === level - 1 ? 2 : 1;
-    const score = scores[i];
-    if (score > Math.random()) {
-      damage += 20 * multiplier;
-    }
-  }
+  const score = scores[level - 1];
+  damage += Math.round(20 * level * score);
   return damage;
 };
 const getPlayerDamageRecieved = (damage: number, level: number) => {
   let block = 0;
-  for (let i = 0; i < level; i++) {
-    const multiplier = i === level - 1 ? 2 : 1;
-    const score = scores[i];
-    if (score > Math.random()) {
-      block += 20 * multiplier;
-    }
-  }
+  const score = scores[level - 1];
+  block += Math.round(20 * level * score);
   const damageRecieved = Math.max(damage - block, 0);
   return damageRecieved;
 };

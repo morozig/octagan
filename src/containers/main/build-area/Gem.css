@@ -1,0 +1,37 @@
+.Gem {
+  width: 30px;
+  height: 30px;
+}
+
+.Gem * {
+  stroke-width: 11px;
+}
+
+.Gem--1 * {
+  stroke: #ef9191;
+  fill: #b30808d6;
+}
+.Gem--2 * {
+  stroke: #ffc997;
+  fill: #f39b16d6;
+}
+.Gem--3 * {
+  stroke: #fdf398;
+  fill: #e0d313d6;
+}
+.Gem--4 * {
+  stroke: #9df879;
+  fill: #57be12d6;
+}
+.Gem--5 * {
+  stroke: #81cff3;
+  fill: #31a7dfd6;
+}
+.Gem--6 * {
+  stroke: #8ca5f7;
+  fill: #3049d6d6;
+}
+.Gem--7 * {
+  stroke: #dd87f7;
+  fill: #8a30d3d6;
+}

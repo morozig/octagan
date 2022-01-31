@@ -71,10 +71,10 @@ const getScore = async (build: string, level: number) => {
   const inputsTensor = tf.tensor([input]);
   const outputsTensor = model.predict(inputsTensor);
   const outputs = await outputsTensor.array() as number[][];
-  console.log({outputs}, new Date().getTime());
   inputsTensor.dispose();
   outputsTensor.dispose();
   const score = outputs[0][0];
+  console.log({score});
   return score;
 };
 
@@ -156,6 +156,8 @@ const useFight = (options: FightOptions) => {
 
     if (value === FightStatus.Started) {
       run();
+    } else if (value === FightStatus.Stopped) {
+      scores.splice(0, scores.length);
     }
   });
   watch(playerStatus, (value, oldValue, onCleanup) => {

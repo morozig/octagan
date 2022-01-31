@@ -4,11 +4,23 @@
 }
 
 .BuildArea-controls {
-  height: 80px;
+  display: block;
+}
+
+.BuildArea-controls-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 20px;
+}
+
+.BuildArea-controls-colors {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  margin: 10px;
 }
 
 .BuildArea-controls--disabled {

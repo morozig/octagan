@@ -63,61 +63,69 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
       <div
         class={controlsClass.value}
       >
-        {new Array(7).fill(undefined).map((_, i) => (
+        <div
+          class={'BuildArea-controls-buttons'}
+        >
+          <button
+            onClick={onRandomClick}
+          >
+            {'Random'}
+          </button>
+          <button
+            onClick={onSaveClick}
+          >
+            {'Save'}
+          </button>
+          <button
+            onClick={onLoadClick}
+          >
+            {'Load'}
+          </button>
+          <button
+            onClick={onClearClick}
+          >
+            {'Clear'}
+          </button>
+        </div>
+        <div
+          class={'BuildArea-controls-colors'}
+        >
+          {new Array(7).fill(undefined).map((_, i) => (
+            <div
+              key={i + 1}
+              class={'BuildArea-controls-color '.concat(
+                colorSelected.value === i + 1 ?
+                  'BuildArea-controls-color--selected ' :
+                  ''
+              )}
+              onClick={() => {
+                if (colorSelected.value === i + 1) {
+                  colorSelected.value = undefined;
+                } else {
+                  colorSelected.value = i + 1
+                }
+              }}
+            >
+              <Gem
+                color={i + 1}
+              />
+            </div>
+          ))}
           <div
-            key={i + 1}
             class={'BuildArea-controls-color '.concat(
-              colorSelected.value === i + 1 ?
+              colorSelected.value === 0 ?
                 'BuildArea-controls-color--selected ' :
                 ''
             )}
             onClick={() => {
-              if (colorSelected.value === i + 1) {
+              if (colorSelected.value === 0) {
                 colorSelected.value = undefined;
               } else {
-                colorSelected.value = i + 1
+                colorSelected.value = 0
               }
             }}
-          >
-            <Gem
-              color={i + 1}
-            />
-          </div>
-        ))}
-        <div
-          class={'BuildArea-controls-color '.concat(
-            colorSelected.value === 0 ?
-              'BuildArea-controls-color--selected ' :
-              ''
-          )}
-          onClick={() => {
-            if (colorSelected.value === 0) {
-              colorSelected.value = undefined;
-            } else {
-              colorSelected.value = 0
-            }
-          }}
-        />
-        <button
-          onClick={onClearClick}
-        >
-          {'Clear'}
-        </button>
-        <button
-          onClick={onRandomClick}
-        >
-          {'Random'}
-        </button>
-        <button
-          onClick={onSaveClick}
-        >
-          {'Save'}
-        </button>
-        <button
-          onClick={onLoadClick}
-        >
-          {'Load'}
-        </button>
+          />
+        </div>
       </div>
       <div
         class={'BuildArea-grid '.concat(

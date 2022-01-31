@@ -8,9 +8,10 @@ import ScreenArea from './screen-area';
 
 export enum GameStatus {
   Stopped,
-  Running,
   Paused,
-  Finished,
+  Running,
+  Lost,
+  Won,
 }
 
 const Main = defineComponent(() => {
@@ -35,12 +36,11 @@ const Main = defineComponent(() => {
   const onLevelChange = (newLevel: number) => {
     level.value = newLevel;
   };
-  const onFail = () => {
-    gameStatus.value = level.value > 1 ?
-      GameStatus.Paused : GameStatus.Stopped;
+  const onLost = () => {
+    gameStatus.value = GameStatus.Lost;
   };
-  const onFinish = () => {
-    gameStatus.value = GameStatus.Finished;
+  const onWon = () => {
+    gameStatus.value = GameStatus.Won;
   };
   const onBuildChange = (newBuild: string) => {
     build.value = newBuild;
@@ -51,8 +51,8 @@ const Main = defineComponent(() => {
       <ScreenArea
         gameStatus={gameStatus.value}
         onLevelChange={onLevelChange}
-        onFinish={onFinish}
-        onFail={onFail}
+        onLost={onLost}
+        onWon={onWon}
         build={build.value}
       />
       <ControlsArea

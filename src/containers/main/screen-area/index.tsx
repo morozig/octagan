@@ -6,14 +6,19 @@ import {
   computed,
 } from 'vue';
 import { GameStatus } from '..';
-import { FightStatus, ProjectileStatus, UnitStatus, useFight } from './composables';
+import {
+  FightStatus,
+  ProjectileStatus,
+  UnitStatus,
+  useFight
+} from './composables';
 import './ScreenArea.css';
 
 interface ScreenAreaProps {
   gameStatus: GameStatus;
   onLevelChange: (level: number) => void;
-  onFail: () => void;
-  onFinish: () => void;
+  onLost: () => void;
+  onWon: () => void;
   build: string;
 }
 
@@ -34,6 +39,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
     enemyHealth,
     damageSent,
     damageRecieved,
+    totalScore,
     start,
     stop,
   } = useFight({
@@ -41,33 +47,42 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
     level,
   });
 
-  watch(gameStatus, (value, oldValue, onCleanup) => {
-    if (value === GameStatus.Stopped) {
-      level.value = 1;
-      stop();
-    } else if (value === GameStatus.Running) {
-      if (
-        oldValue === GameStatus.Finished
-      ) {
+  watch(gameStatus, (value, oldValue) => {
+    switch (value) {
+      case (GameStatus.Stopped): {
         level.value = 1;
+        playerHealth.value = 100;
+        stop();
+        break;
       }
-      start();
-    } else if (value === GameStatus.Paused) {
-      stop();
+      case (GameStatus.Paused): {
+        playerHealth.value = 100;
+        stop();
+        break;
+      }
+      case (GameStatus.Running): {
+        if (
+          oldValue === GameStatus.Won
+        ) {
+          level.value = 1;
+        }
+        start();
+        break;
+      }
     }
   });
 
-  watch(fightStatus, (value, oldValue, onCleanup) => {
+  watch(fightStatus, (value) => {
     if (value === FightStatus.Finished) {
       if (playerHealth.value > 0) {
         if (level.value === 8) {
-          props.onFinish();
+          props.onWon();
         } else {
           level.value += 1;
           start();
         }
       } else {
-        props.onFail();
+        props.onLost();
       }
     }
   });
@@ -76,13 +91,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
 
   // watch([
   //   fightStatus,
-  //   playerStatus,
-  //   enemyStatus,
-  //   projectileStatus,
   //   playerHealth,
-  //   enemyHealth,
-  //   damageSent,
-  //   damageRecieved,
   // ], console.log)
 
   return () => (
@@ -97,9 +106,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         <div
           class={'ScreenArea-unit-health'}
         >
-          {fightStatus.value === FightStatus.Running ?
-            playerHealth.value : 100
-          }
+          {playerHealth.value}
         </div>
         {projectileStatus.value === ProjectileStatus.FlyingFromPlayer &&
           <div
@@ -117,7 +124,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         }
       </div>
       
-      {gameStatus.value !== GameStatus.Finished &&
+      {gameStatus.value !== GameStatus.Won &&
         <>
           <div
             class={'ScreenArea-space '}
@@ -131,7 +138,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         </>
       }
 
-      {gameStatus.value !== GameStatus.Finished &&
+      {gameStatus.value !== GameStatus.Won &&
         <div
           class={'ScreenArea-unit '.concat(
             `ScreenArea-unit--enemy${level.value} `
@@ -175,7 +182,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
           </div>
         </div>
       ))}
-      {gameStatus.value !== GameStatus.Finished &&
+      {gameStatus.value !== GameStatus.Won &&
         <div
           class={'ScreenArea-space '}
         />
@@ -191,6 +198,30 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
           {100}
         </div>
       </div>
+
+      {(gameStatus.value === GameStatus.Lost ||
+        gameStatus.value === GameStatus.Won) &&
+        <div
+          class={'ScreenArea-dialog'}
+        >
+          <p
+            class={'ScreenArea-dialog-result'}
+          >
+            {gameStatus.value === GameStatus.Won ?
+              'YOU WON!' :
+              'YOU LOST'
+            }
+          </p>
+          {totalScore.value ?
+            <p
+              class={'ScreenArea-dialog-score'}
+            >
+              {`Score: ${(totalScore.value * 100).toFixed(1)}%`}
+            </p> :
+            null
+          }
+        </div>
+      }
     </div>
   );
 });
@@ -198,8 +229,8 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
 ScreenArea.props = [
   'gameStatus',
   'onLevelChange',
-  'onFinish',
-  'onFail',
+  'onLost',
+  'onWon',
   'build',
 ];
 

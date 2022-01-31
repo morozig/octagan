@@ -33,7 +33,8 @@ export const enum ProjectileStatus {
   FlyingFromEnemy,
 }
 
-const scores = [] as number[];
+let scoresBuild = '';
+let scores = [] as number[];
 let model; // tf.LayersModel;
 const buildToInput = (build: string, level: number) => {
   const buildArr = build
@@ -116,7 +117,7 @@ const useFight = (options: FightOptions) => {
   const enemyHealth = ref(100 * level.value);
   const enemyStatus = ref(UnitStatus.Idle);
 
-  const score = ref<number>(undefined);
+  const totalScore = ref<number>(undefined);
   const damageSent = ref<number>(undefined);
   const damageRecieved = ref<number>(undefined);
   const projectileStatus = ref(ProjectileStatus.Absent);
@@ -135,18 +136,31 @@ const useFight = (options: FightOptions) => {
 
   watch(fightStatus, (value, oldValue) => {
     const run = async () => {
+      if (scoresBuild !== build.value) {
+        scores = [];
+        scoresBuild = build.value;
+      }
       if (scores[level.value - 1] === undefined) {
         scores[level.value - 1] = await getScore(build.value, level.value);
       }
-      score.value = scores[level.value - 1];
+      const score = scores[level.value - 1];
       fightStatus.value = FightStatus.Running;
       playerStatus.value = UnitStatus.Sending;
     };
 
-    if (value === FightStatus.Started) {
-      run();
-    } else if (value === FightStatus.Stopped) {
-      scores.splice(0, scores.length);
+    switch (value) {
+      case (FightStatus.Started): {
+        run();
+        break;
+      }
+      case (FightStatus.Finished): {
+        if (scores.length) {
+          totalScore.value = scores.reduce(
+            (total, curr) => total + curr, 0
+          ) / scores.length;
+        }
+        break;
+      }
     }
   });
   watch(playerStatus, (value, oldValue, onCleanup) => {
@@ -216,6 +230,7 @@ const useFight = (options: FightOptions) => {
         break;
       }
       case (UnitStatus.Dead): {
+        playerHealth.value = 100;
         fightStatus.value = FightStatus.Finished;
         break;
       }
@@ -266,6 +281,7 @@ const useFight = (options: FightOptions) => {
     enemyHealth,
     damageSent,
     damageRecieved,
+    totalScore,
     start,
     stop,
   };

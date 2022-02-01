@@ -3,7 +3,6 @@ import {
   ref,
   toRefs,
   watch,
-  computed,
 } from 'vue';
 import { GameStatus } from '..';
 import {

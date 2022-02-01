@@ -63,7 +63,6 @@ const getScore = async (build: string, level: number) => {
   const start = new Date().getTime();
   const tf = await import('@tensorflow/tfjs');
   const imported = new Date().getTime();
-  console.log('tf imported', imported - start);
   if (!model) {
     const requestUrl = `${window.location}model/model.json`;
     model = await tf.loadLayersModel(requestUrl);
@@ -133,6 +132,8 @@ const useFight = (options: FightOptions) => {
     enemyStatus.value = UnitStatus.Idle;
     projectileStatus.value = ProjectileStatus.Absent;
   };
+
+  onMounted(() => import('@tensorflow/tfjs'));
 
   watch(fightStatus, (value, oldValue) => {
     const run = async () => {

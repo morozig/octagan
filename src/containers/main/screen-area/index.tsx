@@ -204,20 +204,20 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         <div
           class={'ScreenArea-dialog'}
         >
-          <p
+          <div
             class={'ScreenArea-dialog-result'}
           >
             {gameStatus.value === GameStatus.Won ?
               'YOU WON!' :
               'YOU LOST'
             }
-          </p>
+          </div>
           {totalScore.value ?
-            <p
+            <div
               class={'ScreenArea-dialog-score'}
             >
               {`Score: ${(totalScore.value * 100).toFixed(1)}%`}
-            </p> :
+            </div> :
             null
           }
         </div>

@@ -95,9 +95,9 @@
 
 .ScreenArea-dialog {
   position: absolute;
-  top: 50%;
+  top: 20px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   padding: 20px 40px;
   background-color: rgb(72 72 72 / 96%);
   box-shadow: 5px 5px 5px rgb(66 64 64 / 56%);

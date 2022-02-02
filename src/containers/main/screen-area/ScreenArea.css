@@ -1,5 +1,6 @@
 .ScreenArea {
   height:300px;
+  background-color: white;
   border: 1px solid black;
   display: flex;
   align-items: flex-end;

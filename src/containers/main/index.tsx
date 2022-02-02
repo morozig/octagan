@@ -2,6 +2,7 @@ import {
   defineComponent,
   ref,
 } from 'vue';
+import './Main.css';
 import BuildArea from './build-area';
 import ControlsArea from './controls-area';
 import ScreenArea from './screen-area';
@@ -47,7 +48,7 @@ const Main = defineComponent(() => {
   };
 
   return () => (
-    <>
+    <main>
       <ScreenArea
         gameStatus={gameStatus.value}
         onLevelChange={onLevelChange}
@@ -55,17 +56,21 @@ const Main = defineComponent(() => {
         onWon={onWon}
         build={build.value}
       />
-      <ControlsArea
-        gameStatus={gameStatus.value}
-        onSwitch={onSwitch}
-        onStop={onStop}
-      />
-      <BuildArea
-        build={build.value}
-        onBuildChange={onBuildChange}
-        isDisabled={gameStatus.value !== GameStatus.Stopped}
-      />
-    </>
+      <div
+        class={'Main-controls'}
+      >
+        <ControlsArea
+          gameStatus={gameStatus.value}
+          onSwitch={onSwitch}
+          onStop={onStop}
+        />
+        <BuildArea
+          build={build.value}
+          onBuildChange={onBuildChange}
+          isDisabled={gameStatus.value !== GameStatus.Stopped}
+        />
+      </div>
+    </main>
   );
 });
 

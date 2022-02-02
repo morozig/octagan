@@ -6,9 +6,7 @@ import Main from './containers/main';
 const App = defineComponent(() => {
   return () => {
     return (
-      <>
-        <Main/>
-      </>
+      <Main/>
     );
   };
 });

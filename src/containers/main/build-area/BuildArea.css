@@ -31,8 +31,11 @@
 .BuildArea-controls-color {
   width: 40px;
   height: 40px;
-  background-color: #5c5b5b;
-  border: 1px solid black;
+  background-color: #514c55;
+  border: 2px solid #422800;
+  border-radius: 8px;
+  box-shadow: #422800 4px 4px 0 0;
+  transform: translate(-3px, -3px);
   cursor: pointer;
   display: grid;
   align-content: center;
@@ -40,14 +43,23 @@
 }
 
 .BuildArea-controls-color--selected {
-  background-color: #918b8b;
-  box-shadow: 2px 2px 5px #5c5b5b;
+  background-color: #fbeee0;
+  box-shadow: #422800 3px 3px 0 0;
+  transform: translate(-2px, -2px);
 }
 
 .BuildArea-grid {
   display: grid;
   grid-template-columns: repeat(8, auto);
-  justify-content: center;
+  width: min-content;
+  margin: 0 auto;
+  border: 2px solid #422800;
+  border-radius: 8px;
+  box-shadow: #422800 4px 4px 0 0;
+  transform: translate(-3px, -3px);
+  overflow: hidden;
+  background-color: #bdbab8;
+  gap: 2px;
 }
 
 .BuildArea-grid--active {
@@ -57,8 +69,7 @@
 .BuildArea-grid-item {
   width: 40px;
   height: 40px;
-  border: 1px solid black;
-  background-color: #5c5b5b;
+  background-color: #514c55;
   display: grid;
   align-content: center;
   justify-content: center;

@@ -1,0 +1,58 @@
+.Enemy--secondary {
+  fill: #000000;
+}
+
+.Enemy--1 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  fill: crimson;
+}
+
+.Enemy--2 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  fill: coral;
+}
+.Enemy--3 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  fill: gold;
+}
+.Enemy--4 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  fill: forestgreen;
+}
+.Enemy--5 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  fill: deepskyblue;
+}
+.Enemy--6 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  fill: dodgerblue;
+}
+.Enemy--7 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  fill: darkorchid;
+}
+.Enemy--8 .Enemy--primary {
+  stroke: #000000;
+  stroke-width: 1;
+  animation-name: rainbow;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainbow {
+  from {fill: red; }
+  15%  {fill: orange; }
+  30%  {fill: yellow; }
+  45%  {fill: green; }
+  60%  {fill: lightblue; }
+  75%  {fill: blue; }
+  90%  {fill: purple; }
+  to   {fill: red; }
+}

@@ -10,88 +10,45 @@
 }
 
 .ScreenArea-unit {
-  width: 50px;
-  height: 100px;
-  border: 1px solid black;
-  border-radius: 20px;
-  box-sizing: border-box;
-  position: relative;
+  width: 100px;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .ScreenArea-unit-health {
-  position: absolute;
   height: 20px;
-  top: -20px;
   width: 100%;
   text-align: center;
   font-weight: bold;
 }
 
 .ScreenArea-unit-damage {
-  position: absolute;
   height: 20px;
-  top: -40px;
   width: 100%;
   text-align: center;
   font-weight: bold;
 }
 
-.ScreenArea-unit--player {
+
+.ScreenArea-unit-human {
+  width: 50px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.ScreenArea-unit-human--player {
   background-color: darkgray;
 }
 
-.ScreenArea-unit--princess {
+.ScreenArea-unit-human--princess {
   background-color: deeppink;
 }
 
 .ScreenArea-space {
   width: 50px;
   height: 100px;
-}
-
-.ScreenArea-unit--enemy1 {
-  background-color: crimson;
-}
-
-.ScreenArea-unit--enemy2 {
-  background-color: coral;
-}
-
-.ScreenArea-unit--enemy3 {
-  background-color: gold;
-}
-
-.ScreenArea-unit--enemy4 {
-  background-color: forestgreen;
-}
-
-.ScreenArea-unit--enemy5 {
-  background-color: steelblue;
-}
-
-.ScreenArea-unit--enemy6 {
-  background-color: navy;
-}
-
-.ScreenArea-unit--enemy7 {
-  background-color: indigo;
-}
-
-.ScreenArea-unit--enemy8 {
-  animation-name: rainbow;
-  animation-duration: 8s;
-  animation-iteration-count: infinite;
-}
-
-@keyframes rainbow {
-  from {background-color: red; }
-  15%  {background-color: orange; }
-  30%  {background-color: yellow; }
-  45%  {background-color: green; }
-  60%  {background-color: deepskyblue; }
-  75%  {background-color: blue; }
-  90%  {background-color: purple; }
-  to   {background-color: red; }
 }
 
 .ScreenArea-dialog {

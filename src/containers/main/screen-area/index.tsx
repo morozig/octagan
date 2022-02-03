@@ -11,6 +11,7 @@ import {
   UnitStatus,
   useFight
 } from './composables';
+import Enemy from './Enemy';
 import './ScreenArea.css';
 
 interface ScreenAreaProps {
@@ -98,10 +99,13 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       class={'ScreenArea'}
     >
       <div
-        class={'ScreenArea-unit '.concat(
-          'ScreenArea-unit--player '
-        )}
+        class={'ScreenArea-unit'}
       >
+        <div
+          class={'ScreenArea-unit-human '.concat(
+            'ScreenArea-unit-human--player '
+          )}
+        />
         <div
           class={'ScreenArea-unit-health'}
         >
@@ -139,10 +143,11 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
 
       {gameStatus.value !== GameStatus.Won &&
         <div
-          class={'ScreenArea-unit '.concat(
-            `ScreenArea-unit--enemy${level.value} `
-          )}
+          class={'ScreenArea-unit '}
         >
+          <Enemy
+            color={level.value}
+          />
           <div
             class={'ScreenArea-unit-health'}
           >
@@ -170,10 +175,11 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       {new Array(8 - level.value).fill(undefined).map((_, i) => (
         <div
           key={i + 1 + level.value}
-          class={'ScreenArea-unit '.concat(
-            `ScreenArea-unit--enemy${i + 1 + level.value} `
-          )}
+          class={'ScreenArea-unit '}
         >
+          <Enemy
+            color={i + 1 + level.value}
+          />
           <div
             class={'ScreenArea-unit-health'}
           >
@@ -181,16 +187,20 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
           </div>
         </div>
       ))}
+
       {gameStatus.value !== GameStatus.Won &&
         <div
           class={'ScreenArea-space '}
         />
       }
       <div
-        class={'ScreenArea-unit '.concat(
-          'ScreenArea-unit--princess '
-        )}
+        class={'ScreenArea-unit '}
       >
+        <div
+          class={'ScreenArea-unit-human '.concat(
+            'ScreenArea-unit-human--princess '
+          )}
+        />
         <div
           class={'ScreenArea-unit-health'}
         >

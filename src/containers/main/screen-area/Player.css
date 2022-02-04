@@ -1,0 +1,17 @@
+.Player-color {
+  stroke: #000000;
+  animation-name: led;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes led {
+  from {stop-color: #b30808d6; }
+  15%  {stop-color: #f39b16d6; }
+  30%  {stop-color: #e0d313d6; }
+  45%  {stop-color: #57be12d6; }
+  60%  {stop-color: #31a7dfd6; }
+  75%  {stop-color: #3049d6d6; }
+  90%  {stop-color: #8a30d3d6; }
+  to   {stop-color: #b30808d6; }
+}

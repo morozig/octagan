@@ -12,6 +12,7 @@ import {
   useFight
 } from './composables';
 import Enemy from './Enemy';
+import Player from './Player';
 import './ScreenArea.css';
 
 interface ScreenAreaProps {
@@ -101,11 +102,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       <div
         class={'ScreenArea-unit'}
       >
-        <div
-          class={'ScreenArea-unit-human '.concat(
-            'ScreenArea-unit-human--player '
-          )}
-        />
+        <Player/>
         <div
           class={'ScreenArea-unit-health'}
         >

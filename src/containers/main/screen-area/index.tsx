@@ -13,6 +13,7 @@ import {
 } from './composables';
 import Enemy from './Enemy';
 import Player from './Player';
+import Princess from './Princess';
 import './ScreenArea.css';
 
 interface ScreenAreaProps {
@@ -193,11 +194,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       <div
         class={'ScreenArea-unit '}
       >
-        <div
-          class={'ScreenArea-unit-human '.concat(
-            'ScreenArea-unit-human--princess '
-          )}
-        />
+        <Princess/>
         <div
           class={'ScreenArea-unit-health'}
         >

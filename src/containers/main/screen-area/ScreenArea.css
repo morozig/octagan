@@ -29,23 +29,6 @@
   font-weight: bold;
 }
 
-
-.ScreenArea-unit-human {
-  width: 50px;
-  height: 100px;
-  border: 1px solid black;
-  border-radius: 20px;
-  box-sizing: border-box;
-}
-
-.ScreenArea-unit-human--player {
-  background-color: darkgray;
-}
-
-.ScreenArea-unit-human--princess {
-  background-color: deeppink;
-}
-
 .ScreenArea-space {
   width: 50px;
   height: 100px;

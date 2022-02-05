@@ -1,5 +1,6 @@
 main {
   background-color: #514c55;
+  min-height: 100vh;
 }
 
 .Main-controls {

@@ -1,12 +1,12 @@
 .ScreenArea {
-  height:300px;
-  background-color: white;
-  border: 1px solid black;
+  height:250px;
+  background: radial-gradient(#5668a3, #3f87a6, #75f8f8);
   display: flex;
   align-items: flex-end;
   justify-content: center;
   gap: 20px;
-  position: relative;
+  margin: 0 0 20px 0;
+  border-bottom: 8px solid #e0cebd;
 }
 
 .ScreenArea-unit {
@@ -35,7 +35,7 @@
 }
 
 .ScreenArea-dialog {
-  position: absolute;
+  position: fixed;
   top: 20px;
   left: 50%;
   transform: translate(-50%, 0);

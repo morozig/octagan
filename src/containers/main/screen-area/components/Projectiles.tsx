@@ -3,7 +3,7 @@ import {
   computed,
   toRefs,
 } from 'vue';
-import { ProjectileStatus } from './composables';
+import { ProjectileStatus } from '../composables';
 import './Projectiles.css';
 
 interface ProjectilesProps {

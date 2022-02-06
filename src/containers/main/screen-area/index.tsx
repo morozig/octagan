@@ -11,10 +11,10 @@ import {
   UnitStatus,
   useFight
 } from './composables';
-import Enemy from './Enemy';
-import Player from './Player';
-import Princess from './Princess';
-import Projectiles from './Projectiles';
+import Enemy from './components/Enemy';
+import Player from './components/Player';
+import Princess from './components/Princess';
+import Projectiles from './components/Projectiles';
 import './ScreenArea.css';
 
 interface ScreenAreaProps {

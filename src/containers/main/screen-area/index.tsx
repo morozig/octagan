@@ -105,9 +105,11 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       <div
         class={'ScreenArea-unit'}
       >
-        <Player
+        <div
           class={'ScreenArea-unit-fighter'}
-        />
+        >
+          <Player/>
+        </div>
         <HealthBar
           health={playerHealth.value}
           maxHealth={100}
@@ -122,9 +124,12 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         }
         {playerStatus.value === UnitStatus.Recieving &&
           <div
-            class={'ScreenArea-unit-damage'}
+            class={'ScreenArea-unit-damagerecieved'}
           >
-            {-damageRecieved.value}
+            {damageRecieved.value > 0 ?
+              `-${damageRecieved.value}` :
+              '0'
+            }
           </div>
         }
       </div>
@@ -140,10 +145,16 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         <div
           class={'ScreenArea-unit '}
         >
-          <Enemy
-            color={level.value}
-            class={'ScreenArea-unit-fighter'}
-          />
+          <div
+            class={'ScreenArea-unit-fighter '.concat(
+              enemyStatus.value === UnitStatus.Recieving ?
+                'ScreenArea-unit--shaking ' : ' '
+            )}
+          >
+            <Enemy
+              color={level.value}
+            />
+          </div>
           <HealthBar
             health={fightStatus.value === FightStatus.Running ?
               enemyHealth.value : 100 * level.value}
@@ -158,7 +169,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
           }
           {enemyStatus.value === UnitStatus.Recieving &&
             <div
-              class={'ScreenArea-unit-damage'}
+              class={'ScreenArea-unit-damagerecieved'}
             >
               {-damageRecieved.value}
             </div>

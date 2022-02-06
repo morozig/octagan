@@ -87,7 +87,7 @@
 
 .Projectiles-area-plasma--flying {
   animation-name: plasma, right;
-  animation-duration: 8s, 1s;
+  animation-duration: 8s, 900ms;
   animation-timing-function: ease, linear;
   animation-iteration-count: infinite, 1;
 }
@@ -101,7 +101,7 @@
   position: absolute;
   top: 31px;
   left: 100%;
-  width: 100%;
+  width: 200%;
   height: 5px;
 }
 

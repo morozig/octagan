@@ -5,11 +5,11 @@ import {
 } from 'vue';
 
 export const animationTimings = {
-  playerSending: 400,
+  playerSending: 50,
   playerRecieving: 800,
-  enemySending: 400,
+  enemySending: 50,
   enemyRecieving: 800,
-  playerProjectileFlying: 1000,
+  playerProjectileFlying: 900,
   enemyProjectileFlying: 1000,
 };
 
@@ -165,7 +165,7 @@ const useFight = (options: FightOptions) => {
     }
   });
   watch(playerStatus, (value, oldValue, onCleanup) => {
-    let timerHandle: NodeJS.Timeout | undefined
+    let timerHandle: NodeJS.Timeout | undefined;
     onCleanup(() => {
       if (timerHandle) {
         clearTimeout(timerHandle);
@@ -183,10 +183,6 @@ const useFight = (options: FightOptions) => {
       }
       case (UnitStatus.Recieving): {
         timerHandle = setTimeout(() => {
-          playerHealth.value = Math.max(
-            playerHealth.value - damageRecieved.value,
-            0
-          );
           playerStatus.value = playerHealth.value > 0 ?
             UnitStatus.Sending :
             UnitStatus.Dead;
@@ -201,7 +197,7 @@ const useFight = (options: FightOptions) => {
     }
   });
   watch(enemyStatus, (value, oldValue, onCleanup) => {
-    let timerHandle: NodeJS.Timeout | undefined
+    let timerHandle: NodeJS.Timeout | undefined;
     onCleanup(() => {
       if (timerHandle) {
         clearTimeout(timerHandle);
@@ -211,10 +207,6 @@ const useFight = (options: FightOptions) => {
     switch (value) {
       case (UnitStatus.Recieving): {
         timerHandle = setTimeout(() => {
-          enemyHealth.value = Math.max(
-            enemyHealth.value - damageRecieved.value,
-            0
-          );
           enemyStatus.value = enemyHealth.value > 0 ?
             UnitStatus.Sending :
             UnitStatus.Dead;
@@ -238,7 +230,7 @@ const useFight = (options: FightOptions) => {
     }
   });
   watch(projectileStatus, (value, oldValue, onCleanup) => {
-    let timerHandle: NodeJS.Timeout | undefined
+    let timerHandle: NodeJS.Timeout | undefined;
     onCleanup(() => {
       if (timerHandle) {
         clearTimeout(timerHandle);
@@ -255,6 +247,10 @@ const useFight = (options: FightOptions) => {
             level.value
           );
           damageSent.value = undefined;
+          enemyHealth.value = Math.max(
+            enemyHealth.value - damageRecieved.value,
+            0
+          );
         }, animationTimings.playerProjectileFlying);
         break;
       }
@@ -267,6 +263,10 @@ const useFight = (options: FightOptions) => {
             level.value
           );
           damageSent.value = undefined;
+          playerHealth.value = Math.max(
+            playerHealth.value - damageRecieved.value,
+            0
+          );
         }, animationTimings.enemyProjectileFlying);
         break;
       }

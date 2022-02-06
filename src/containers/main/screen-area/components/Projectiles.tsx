@@ -2,6 +2,8 @@ import {
   defineComponent,
   computed,
   toRefs,
+  ref,
+  watch,
 } from 'vue';
 import { ProjectileStatus } from '../composables';
 import './Projectiles.css';
@@ -17,17 +19,24 @@ const Projectiles = defineComponent<ProjectilesProps>((props) => {
     level,
   } = toRefs(props);
 
+  const isLaserFlying = ref(false);
+
+  watch(projectileStatus, (value, oldValue) => {
+    isLaserFlying.value = value === ProjectileStatus.FlyingFromEnemy ||
+      oldValue === ProjectileStatus.FlyingFromEnemy;
+  });
+
   const laserClassName = computed(() => {
     if (
       level.value === 8 &&
-      projectileStatus.value === ProjectileStatus.FlyingFromEnemy
+      isLaserFlying.value
     ) return 'Projectiles-area-laser '.concat(
       'Projectiles-area-laser--flying8 '
     );
 
     return 'Projectiles-area-laser '.concat(
       `Projectiles-area-laser--${level.value} `,
-      projectileStatus.value === ProjectileStatus.FlyingFromEnemy ?
+      isLaserFlying.value ?
         'Projectiles-area-laser--flying ' : ' ',
     );
   });

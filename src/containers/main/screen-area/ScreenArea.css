@@ -22,7 +22,7 @@
 
 .ScreenArea-unit--negative {
   animation-name: negative;
-  animation-duration: 500ms;
+  animation-duration: 1100ms;
   animation-iteration-count: 1;
 }
 
@@ -88,6 +88,7 @@
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
   font-size: 24px;
+  color: #ff000000;
 
   animation-duration: 800ms;
   animation-iteration-count: 1;

@@ -5,12 +5,12 @@ import {
 } from 'vue';
 
 export const animationTimings = {
-  playerSending: 200,
-  playerRecieving: 800,
-  enemySending: 300,
-  enemyRecieving: 800,
+  playerSending: 50,
+  playerRecieving: 1100,
+  enemySending: 50,
+  enemyRecieving: 1100,
   playerProjectileFlying: 900,
-  enemyProjectileFlying: 1000,
+  enemyProjectileFlying: 350,
 };
 
 export const enum UnitStatus {

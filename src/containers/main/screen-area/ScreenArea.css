@@ -19,11 +19,8 @@
   z-index: 1;
 }
 
-.ScreenArea-unit-health {
-  height: 20px;
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
+.ScreenArea-unit-humanhealth {
+  margin: 0 0 10px 0;
 }
 
 .ScreenArea-unit-damage {

@@ -16,6 +16,7 @@ import Player from './components/Player';
 import Princess from './components/Princess';
 import Projectiles from './components/Projectiles';
 import './ScreenArea.css';
+import HealthBar from './components/HealthBar';
 
 interface ScreenAreaProps {
   gameStatus: GameStatus;
@@ -107,11 +108,11 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         <Player
           class={'ScreenArea-unit-fighter'}
         />
-        <div
-          class={'ScreenArea-unit-health'}
-        >
-          {playerHealth.value}
-        </div>
+        <HealthBar
+          health={playerHealth.value}
+          maxHealth={100}
+          class={'ScreenArea-unit-humanhealth'}
+        />
         {projectileStatus.value === ProjectileStatus.FlyingFromPlayer &&
           <div
             class={'ScreenArea-unit-damage'}
@@ -143,13 +144,11 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
             color={level.value}
             class={'ScreenArea-unit-fighter'}
           />
-          <div
-            class={'ScreenArea-unit-health'}
-          >
-            {fightStatus.value === FightStatus.Running ?
-              enemyHealth.value : 100 * level.value
-            }
-          </div>
+          <HealthBar
+            health={fightStatus.value === FightStatus.Running ?
+              enemyHealth.value : 100 * level.value}
+            maxHealth={100 * level.value}
+          />
           {projectileStatus.value === ProjectileStatus.FlyingFromEnemy &&
             <div
               class={'ScreenArea-unit-damage'}
@@ -175,11 +174,10 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
           <Enemy
             color={i + 1 + level.value}
           />
-          <div
-            class={'ScreenArea-unit-health'}
-          >
-            {(i + 1 + level.value) * 100}
-          </div>
+          <HealthBar
+            health={(i + 1 + level.value) * 100}
+            maxHealth={(i + 1 + level.value) * 100}
+          />
         </div>
       ))}
 
@@ -192,11 +190,11 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         class={'ScreenArea-unit '}
       >
         <Princess/>
-        <div
-          class={'ScreenArea-unit-health'}
-        >
-          {100}
-        </div>
+        <HealthBar
+          health={100}
+          maxHealth={100}
+          class={'ScreenArea-unit-humanhealth'}
+        />
       </div>
 
       {(gameStatus.value === GameStatus.Lost ||

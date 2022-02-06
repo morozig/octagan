@@ -1,0 +1,24 @@
+.HealthBar {
+  border: 1px solid black;
+  width: 100%;
+  height: 20px;
+  box-sizing: border-box;
+  background-color: #212121;
+  position: relative;
+}
+
+.HealthBar-health {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.HealthBar-number {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+}

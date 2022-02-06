@@ -106,7 +106,12 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         class={'ScreenArea-unit'}
       >
         <div
-          class={'ScreenArea-unit-fighter'}
+          class={'ScreenArea-unit-fighter '.concat(
+            (
+              playerStatus.value === UnitStatus.Recieving &&
+              damageRecieved.value > 0
+            ) ? 'ScreenArea-unit--negative ' : ' '
+          )}
         >
           <Player/>
         </div>

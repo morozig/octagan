@@ -20,10 +20,22 @@
   z-index: 1;
 }
 
+.ScreenArea-unit--negative {
+  animation-name: negative;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+}
+
+@keyframes negative {
+  0% { filter: invert(0) }
+  50% { filter: invert(1) }
+  100% { filter: invert(0) }
+}
+
 .ScreenArea-unit--shaking {
   animation-name: shake;
   animation-duration: 500ms;
-  animation-iteration-count: infinite;
+  animation-iteration-count: 1;
 }
 
 @keyframes shake {

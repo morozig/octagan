@@ -5,9 +5,9 @@ import {
 } from 'vue';
 
 export const animationTimings = {
-  playerSending: 50,
+  playerSending: 200,
   playerRecieving: 800,
-  enemySending: 50,
+  enemySending: 300,
   enemyRecieving: 800,
   playerProjectileFlying: 900,
   enemyProjectileFlying: 1000,

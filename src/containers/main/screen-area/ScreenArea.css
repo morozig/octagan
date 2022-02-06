@@ -1,6 +1,6 @@
 .ScreenArea {
   height:250px;
-  background: radial-gradient(#5668a3, #3f87a6, #75f8f8);
+  background: linear-gradient(to top right, #5668a3, #3f87a6, #75f8f8);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -13,6 +13,10 @@
   width: 100px;
   display: flex;
   flex-direction: column-reverse;
+}
+
+.ScreenArea-unit-fighter {
+  z-index: 1;
 }
 
 .ScreenArea-unit-health {

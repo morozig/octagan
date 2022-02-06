@@ -14,6 +14,7 @@ import {
 import Enemy from './Enemy';
 import Player from './Player';
 import Princess from './Princess';
+import Projectiles from './Projectiles';
 import './ScreenArea.css';
 
 interface ScreenAreaProps {
@@ -103,7 +104,9 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       <div
         class={'ScreenArea-unit'}
       >
-        <Player/>
+        <Player
+          class={'ScreenArea-unit-fighter'}
+        />
         <div
           class={'ScreenArea-unit-health'}
         >
@@ -126,17 +129,10 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       </div>
       
       {gameStatus.value !== GameStatus.Won &&
-        <>
-          <div
-            class={'ScreenArea-space '}
-          />
-          <div
-            class={'ScreenArea-space '}
-          />
-          <div
-            class={'ScreenArea-space '}
-          />
-        </>
+        <Projectiles
+          projectileStatus={projectileStatus.value}
+          level={level.value}
+        />
       }
 
       {gameStatus.value !== GameStatus.Won &&
@@ -145,6 +141,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         >
           <Enemy
             color={level.value}
+            class={'ScreenArea-unit-fighter'}
           />
           <div
             class={'ScreenArea-unit-health'}

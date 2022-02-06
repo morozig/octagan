@@ -1,0 +1,247 @@
+.Projectiles {
+  width: 200px;
+  height: 100px;
+  position: relative;
+}
+
+.Projectiles-area {
+  position: absolute;
+  top: 0;
+  right: -70px;
+  bottom: 0;
+  left: -70px;
+  overflow: hidden;
+}
+
+.Projectiles-area-plasma {
+  position: absolute;
+  top: 40px;
+  right: 100%;
+  width: 40px;
+  height: 10px;
+  border-radius: 5px;
+  animation-name: plasma;
+  animation-duration: 8s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+@keyframes plasma {
+  from {
+    background: radial-gradient(#ffffff, 80%, #ef9191);
+    box-shadow:
+      0 0 10px #ef9191,
+      0 0 20px #ef9191,
+      0 0 40px #ef9191;
+  }
+  15%  {
+    background: radial-gradient(#ffffff, 80%, #ffc997);
+    box-shadow:
+      0 0 10px #ffc997,
+      0 0 20px #ffc997,
+      0 0 40px #ffc997;
+  }
+  30%  {
+    background: radial-gradient(#ffffff, 80%, #fdf398);
+    box-shadow:
+      0 0 10px #fdf398,
+      0 0 20px #fdf398,
+      0 0 40px #fdf398;
+    }
+  45%  {
+    background: radial-gradient(#ffffff, 80%, #9df879);
+    box-shadow:
+      0 0 10px #9df879,
+      0 0 20px #9df879,
+      0 0 40px #9df879;
+    }
+  60%  {
+    background: radial-gradient(#ffffff, 80%, #81cff3);
+    box-shadow:
+      0 0 10px #81cff3,
+      0 0 20px #81cff3,
+      0 0 40px #81cff3;
+    }
+  75%  {
+    background: radial-gradient(#ffffff, 80%, #81cff3);
+    box-shadow:
+      0 0 10px #81cff3,
+      0 0 20px #81cff3,
+      0 0 40px #81cff3;
+    }
+  90%  {
+    background: radial-gradient(#ffffff, 80%, #dd87f7);
+    box-shadow:
+      0 0 10px #dd87f7,
+      0 0 20px #dd87f7,
+      0 0 40px #dd87f7;
+    }
+  to   {
+    background: radial-gradient(#ffffff, 80%, #ef9191);
+    box-shadow:
+      0 0 10px #ef9191,
+      0 0 20px #ef9191,
+      0 0 40px #ef9191;
+    }
+}
+
+.Projectiles-area-plasma--flying {
+  animation-name: plasma, right;
+  animation-duration: 8s, 1s;
+  animation-timing-function: ease, linear;
+  animation-iteration-count: infinite, 1;
+}
+
+@keyframes right {
+  from { right: 100%; }
+  to   { right: -40px; }
+}
+
+.Projectiles-area-laser {
+  position: absolute;
+  top: 31px;
+  left: 100%;
+  width: 100%;
+  height: 5px;
+}
+
+.Projectiles-area-laser--1 {
+  background: linear-gradient(#ff0000, #ffffff, #ff0000);
+  box-shadow:
+    0 0 5px #ff0000,
+    0 0 10px #ff0000,
+    0 0 20px #ff0000;
+}
+
+.Projectiles-area-laser--2 {
+  background: linear-gradient(#ffab8d, white, #ffab8d);
+  box-shadow:
+    0 0 5px #ffab8d,
+    0 0 10px #ffab8d,
+    0 0 20px #ffab8d;
+}
+
+.Projectiles-area-laser--3 {
+  background: linear-gradient(#ffff00, white, #ffff00);
+  box-shadow:
+    0 0 5px #ffff00,
+    0 0 10px #ffff00,
+    0 0 20px #ffff00;
+}
+
+.Projectiles-area-laser--4 {
+  background: linear-gradient(#00ff00, white, #00ff00);
+  box-shadow:
+    0 0 5px #00ff00,
+    0 0 10px #00ff00,
+    0 0 20px #00ff00;
+}
+
+.Projectiles-area-laser--5 {
+  background: linear-gradient(#00e1ff, white, #00e1ff);
+  box-shadow:
+    0 0 5px #00e1ff,
+    0 0 10px #00e1ff,
+    0 0 20px #00e1ff;
+}
+
+.Projectiles-area-laser--6 {
+  background: linear-gradient(#8dc8ff, white, #8dc8ff);
+  box-shadow:
+    0 0 5px #8dc8ff,
+    0 0 10px #8dc8ff,
+    0 0 20px #8dc8ff;
+}
+
+.Projectiles-area-laser--7 {
+  background: linear-gradient(#ff00ff, white, #ff00ff);
+  box-shadow:
+    0 0 5px #ff00ff,
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff;
+}
+
+.Projectiles-area-laser--8 {
+  animation-name: laser;
+  animation-duration: 8s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
+@keyframes laser {
+  from {
+    background: linear-gradient(#ff0000, white, #ff0000);
+    box-shadow:
+      0 0 5px #ff0000,
+      0 0 10px #ff0000,
+      0 0 20px #ff0000;
+  }
+  15%  {
+    background: linear-gradient(#ffab8d, white, #ffab8d);
+    box-shadow:
+      0 0 5px #ffab8d,
+      0 0 10px #ffab8d,
+      0 0 20px #ffab8d;
+  }
+  30%  {
+    background: linear-gradient(#ffff00, white, #ffff00);
+    box-shadow:
+      0 0 5px #ffff00,
+      0 0 10px #ffff00,
+      0 0 20px #ffff00;
+    }
+  45%  {
+    background: linear-gradient(#00ff00, white, #00ff00);
+    box-shadow:
+      0 0 5px #00ff00,
+      0 0 10px #00ff00,
+      0 0 20px #00ff00;
+    }
+  60%  {
+    background: linear-gradient(#00e1ff, white, #00e1ff);
+    box-shadow:
+      0 0 5px #00e1ff,
+      0 0 10px #00e1ff,
+      0 0 20px #00e1ff;
+    }
+  75%  {
+    background: linear-gradient(#8dc8ff, white, #8dc8ff);
+    box-shadow:
+      0 0 5px #8dc8ff,
+      0 0 10px #8dc8ff,
+      0 0 20px #8dc8ff;
+    }
+  90%  {
+    background: linear-gradient(#ff00ff, white, #ff00ff);
+    box-shadow:
+      0 0 5px #ff00ff,
+      0 0 10px #ff00ff,
+      0 0 20px #ff00ff;
+    }
+  to   {
+    background: linear-gradient(#ff0000, white, #ff0000);
+    box-shadow:
+      0 0 5px #ff0000,
+      0 0 10px #ff0000,
+      0 0 20px #ff0000;
+    }
+}
+
+.Projectiles-area-laser--flying {
+  animation-name: left;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+.Projectiles-area-laser--flying8 {
+  animation-name: laser, left;
+  animation-duration: 8s, 1s;
+  animation-timing-function: ease, linear;
+  animation-iteration-count: infinite, 1;
+}
+
+@keyframes left {
+  from { left: 100%; }
+  to   { left: -200%; }
+}

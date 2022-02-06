@@ -5,12 +5,14 @@ import {
 import './Player.css';
 
 interface PlayerProps {
+  class?: string;
   isDead?: boolean;
 }
 
 const Player = defineComponent<PlayerProps>((props) => {
   const className = computed(() => 'Player '.concat(
-    props.isDead ? `Player--dead ` : ' ',
+    props.isDead ? 'Player--dead ' : ' ',
+    props.class ? `${props.class } ` : ' ',
   ));
 
   return () => (
@@ -157,6 +159,7 @@ const Player = defineComponent<PlayerProps>((props) => {
 });
 
 Player.props = [
+  'class',
   'isDead',
 ];
 

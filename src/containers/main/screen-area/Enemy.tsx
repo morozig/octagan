@@ -6,11 +6,13 @@ import './Enemy.css';
 
 interface EnemyProps {
   color: number;
+  class?: string;
 }
 
 const Enemy = defineComponent<EnemyProps>((props) => {
   const className = computed(() => 'Enemy '.concat(
     `Enemy--${props.color} `,
+    props.class ? `${props.class } ` : ' ',
   ));
 
   return () => (
@@ -64,6 +66,7 @@ const Enemy = defineComponent<EnemyProps>((props) => {
 
 Enemy.props = [
   'color',
+  'class',
 ];
 
 export default Enemy;

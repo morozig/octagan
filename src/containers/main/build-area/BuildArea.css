@@ -12,6 +12,7 @@
   align-items: center;
   gap: 30px;
   margin: 20px;
+  flex-wrap: wrap;
 }
 
 .BuildArea-controls-colors {
@@ -22,9 +23,15 @@
   margin: 10px;
 }
 
-.BuildArea-controls--disabled {
+.BuildArea-controls--disabled button:not(.BuildArea-controls--enabled),
+.BuildArea-controls--disabled .BuildArea-controls-color {
   opacity: 0.3;
   pointer-events: none;
+}
+
+.BuildArea-controls--enabled {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .BuildArea-controls-color {

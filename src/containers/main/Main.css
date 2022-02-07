@@ -6,7 +6,6 @@ main {
 .Main-controls {
   display: grid;
   justify-content: center;
-  grid-template-columns: min-content;
   gap: 20px;
 }
 

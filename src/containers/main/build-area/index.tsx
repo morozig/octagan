@@ -64,6 +64,9 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
       props.onBuildChange(build);
     }
   };
+  const onCloneClick = () => {
+    window.open(window.location.href, '_blank');
+  };
 
   watch(isDisabled, () => {
     colorSelected.value = undefined;
@@ -89,6 +92,11 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
             {'Random'}
           </button>
           <button
+            onClick={onClearClick}
+          >
+            {'Clear'}
+          </button>
+          <button
             onClick={onSaveClick}
           >
             {'Save'}
@@ -99,9 +107,10 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
             {'Load'}
           </button>
           <button
-            onClick={onClearClick}
+            onClick={onCloneClick}
+            class={'BuildArea-controls--enabled'}
           >
-            {'Clear'}
+            {'Clone'}
           </button>
         </div>
         <div

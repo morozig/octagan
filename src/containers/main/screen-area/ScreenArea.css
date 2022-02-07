@@ -1,12 +1,18 @@
 .ScreenArea {
+  overflow-x: auto;
+  margin: 0 0 20px 0;
+}
+
+.ScreenArea-inner {
   height:250px;
   background: linear-gradient(to top right, #5668a3, #3f87a6, #75f8f8);
   display: flex;
   align-items: flex-end;
-  justify-content: center;
   gap: 20px;
-  margin: 0 0 20px 0;
   border-bottom: 8px solid #e0cebd;
+  width: 100vw;
+  min-width: 1350px;
+  justify-content: center;
 }
 
 .ScreenArea-unit {
@@ -110,8 +116,7 @@
 }
 
 .ScreenArea-space {
-  width: 50px;
-  height: 100px;
+  flex: 0 1 50px;
 }
 
 .ScreenArea-dialog--lost {

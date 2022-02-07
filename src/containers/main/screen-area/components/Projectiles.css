@@ -1,5 +1,6 @@
 .Projectiles {
   width: 200px;
+  max-width: calc(100vw - 250px);
   height: 100px;
   position: relative;
 }

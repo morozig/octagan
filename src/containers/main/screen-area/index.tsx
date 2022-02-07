@@ -103,155 +103,159 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       class={'ScreenArea'}
     >
       <div
-        class={'ScreenArea-unit'}
+        class={'ScreenArea-inner'}
       >
         <div
-          class={'ScreenArea-unit-fighter '.concat(
-            (
-              playerStatus.value === UnitStatus.Recieving &&
-              damageRecieved.value > 0
-            ) ? 'ScreenArea-unit--negative ' : ' '
-          )}
-        >
-          <Player/>
-        </div>
-        <HealthBar
-          health={playerHealth.value}
-          maxHealth={100}
-          class={'ScreenArea-unit-humanhealth'}
-        />
-        {projectileStatus.value === ProjectileStatus.FlyingFromPlayer &&
-          <div
-            class={'ScreenArea-unit-damage'}
-          >
-            {damageSent.value}
-          </div>
-        }
-        {playerStatus.value === UnitStatus.Recieving &&
-          <div
-            class={'ScreenArea-unit-damagerecieved'}
-          >
-            {damageRecieved.value > 0 ?
-              `-${damageRecieved.value}` :
-              '0'
-            }
-          </div>
-        }
-      </div>
-      
-      {gameStatus.value !== GameStatus.Won &&
-        <Projectiles
-          projectileStatus={projectileStatus.value}
-          playerStatus={playerStatus.value}
-          level={level.value}
-        />
-      }
-
-      {gameStatus.value !== GameStatus.Won &&
-        <div
-          class={'ScreenArea-unit '}
+          class={'ScreenArea-unit'}
         >
           <div
             class={'ScreenArea-unit-fighter '.concat(
-              enemyStatus.value === UnitStatus.Recieving ?
-                'ScreenArea-unit--shaking ' : ' '
+              (
+                playerStatus.value === UnitStatus.Recieving &&
+                damageRecieved.value > 0
+              ) ? 'ScreenArea-unit--negative ' : ' '
             )}
           >
-            <Enemy
-              color={level.value}
-            />
+            <Player/>
           </div>
           <HealthBar
-            health={fightStatus.value === FightStatus.Running ?
-              enemyHealth.value : 100 * level.value}
-            maxHealth={100 * level.value}
+            health={playerHealth.value}
+            maxHealth={100}
+            class={'ScreenArea-unit-humanhealth'}
           />
-          {projectileStatus.value === ProjectileStatus.FlyingFromEnemy &&
+          {projectileStatus.value === ProjectileStatus.FlyingFromPlayer &&
             <div
               class={'ScreenArea-unit-damage'}
             >
               {damageSent.value}
             </div>
           }
-          {enemyStatus.value === UnitStatus.Recieving &&
+          {playerStatus.value === UnitStatus.Recieving &&
             <div
               class={'ScreenArea-unit-damagerecieved'}
             >
-              {-damageRecieved.value}
+              {damageRecieved.value > 0 ?
+                `-${damageRecieved.value}` :
+                '0'
+              }
             </div>
           }
         </div>
-      }
+        
+        {gameStatus.value !== GameStatus.Won &&
+          <Projectiles
+            projectileStatus={projectileStatus.value}
+            playerStatus={playerStatus.value}
+            level={level.value}
+          />
+        }
 
-      {new Array(8 - level.value).fill(undefined).map((_, i) => (
+        {gameStatus.value !== GameStatus.Won &&
+          <div
+            class={'ScreenArea-unit '}
+          >
+            <div
+              class={'ScreenArea-unit-fighter '.concat(
+                enemyStatus.value === UnitStatus.Recieving ?
+                  'ScreenArea-unit--shaking ' : ' '
+              )}
+            >
+              <Enemy
+                color={level.value}
+              />
+            </div>
+            <HealthBar
+              health={fightStatus.value === FightStatus.Running ?
+                enemyHealth.value : 100 * level.value}
+              maxHealth={100 * level.value}
+            />
+            {projectileStatus.value === ProjectileStatus.FlyingFromEnemy &&
+              <div
+                class={'ScreenArea-unit-damage'}
+              >
+                {damageSent.value}
+              </div>
+            }
+            {enemyStatus.value === UnitStatus.Recieving &&
+              <div
+                class={'ScreenArea-unit-damagerecieved'}
+              >
+                {-damageRecieved.value}
+              </div>
+            }
+          </div>
+        }
+
+        {new Array(8 - level.value).fill(undefined).map((_, i) => (
+          <div
+            key={i + 1 + level.value}
+            class={'ScreenArea-unit '}
+          >
+            <Enemy
+              color={i + 1 + level.value}
+            />
+            <HealthBar
+              health={(i + 1 + level.value) * 100}
+              maxHealth={(i + 1 + level.value) * 100}
+            />
+          </div>
+        ))}
+
+        {gameStatus.value !== GameStatus.Won &&
+          <div
+            class={'ScreenArea-space '}
+          />
+        }
         <div
-          key={i + 1 + level.value}
           class={'ScreenArea-unit '}
         >
-          <Enemy
-            color={i + 1 + level.value}
-          />
+          <Princess/>
           <HealthBar
-            health={(i + 1 + level.value) * 100}
-            maxHealth={(i + 1 + level.value) * 100}
+            health={100}
+            maxHealth={100}
+            class={'ScreenArea-unit-humanhealth'}
           />
         </div>
-      ))}
 
-      {gameStatus.value !== GameStatus.Won &&
-        <div
-          class={'ScreenArea-space '}
-        />
-      }
-      <div
-        class={'ScreenArea-unit '}
-      >
-        <Princess/>
-        <HealthBar
-          health={100}
-          maxHealth={100}
-          class={'ScreenArea-unit-humanhealth'}
-        />
+        {gameStatus.value === GameStatus.Lost &&
+          <div
+            class={'ScreenArea-dialog--lost'}
+          >
+            <div
+              class={'ScreenArea-dialog-result'}
+            >
+              {'DISCRIMINATED'}
+            </div>
+            {totalScore.value ?
+              <div
+                class={'ScreenArea-dialog-score'}
+              >
+                {`Score: ${(totalScore.value * 100).toFixed(1)}%`}
+              </div> :
+              null
+            }
+          </div>
+        }
+        {gameStatus.value === GameStatus.Won &&
+          <div
+            class={'ScreenArea-dialog--won'}
+          >
+            <div
+              class={'ScreenArea-dialog-result'}
+            >
+              {'Victory!'}
+            </div>
+            {totalScore.value ?
+              <div
+                class={'ScreenArea-dialog-score'}
+              >
+                {`Score: ${(totalScore.value * 100).toFixed(1)}%`}
+              </div> :
+              null
+            }
+          </div>
+        }
       </div>
-
-      {gameStatus.value === GameStatus.Lost &&
-        <div
-          class={'ScreenArea-dialog--lost'}
-        >
-          <div
-            class={'ScreenArea-dialog-result'}
-          >
-            {'DISCRIMINATED'}
-          </div>
-          {totalScore.value ?
-            <div
-              class={'ScreenArea-dialog-score'}
-            >
-              {`Score: ${(totalScore.value * 100).toFixed(1)}%`}
-            </div> :
-            null
-          }
-        </div>
-      }
-      {gameStatus.value === GameStatus.Won &&
-        <div
-          class={'ScreenArea-dialog--won'}
-        >
-          <div
-            class={'ScreenArea-dialog-result'}
-          >
-            {'Victory!'}
-          </div>
-          {totalScore.value ?
-            <div
-              class={'ScreenArea-dialog-score'}
-            >
-              {`Score: ${(totalScore.value * 100).toFixed(1)}%`}
-            </div> :
-            null
-          }
-        </div>
-      }
     </div>
   );
 });

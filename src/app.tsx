@@ -4,11 +4,15 @@ import Main from './containers/main';
 
 
 const App = defineComponent(() => {
-  return () => {
-    return (
-      <Main/>
-    );
-  };
+  useMeta({
+    meta: [
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }
+    ],
+  });
+
+  return () => (
+    <Main/>
+  );
 });
 
 export default App;

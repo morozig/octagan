@@ -142,6 +142,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
       {gameStatus.value !== GameStatus.Won &&
         <Projectiles
           projectileStatus={projectileStatus.value}
+          playerStatus={playerStatus.value}
           level={level.value}
         />
       }

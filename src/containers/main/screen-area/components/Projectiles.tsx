@@ -5,26 +5,32 @@ import {
   ref,
   watch,
 } from 'vue';
-import { ProjectileStatus } from '../composables';
+import { ProjectileStatus, UnitStatus } from '../composables';
 import './Projectiles.css';
 
 interface ProjectilesProps {
   projectileStatus: ProjectileStatus;
+  playerStatus: UnitStatus;
   level: number;
 }
 
 const Projectiles = defineComponent<ProjectilesProps>((props) => {
   const {
     projectileStatus,
+    playerStatus,
     level,
   } = toRefs(props);
 
   const isLaserFlying = ref(false);
 
-  watch(projectileStatus, (value, oldValue) => {
-    isLaserFlying.value = value === ProjectileStatus.FlyingFromEnemy ||
-      oldValue === ProjectileStatus.FlyingFromEnemy;
-  });
+  watch(
+    [projectileStatus, playerStatus],
+    ([ projectileValue, playerValue ]) => {
+      isLaserFlying.value =
+        projectileValue === ProjectileStatus.FlyingFromEnemy ||
+        playerValue === UnitStatus.Recieving;
+    }
+  );
 
   const laserClassName = computed(() => {
     if (
@@ -64,6 +70,7 @@ const Projectiles = defineComponent<ProjectilesProps>((props) => {
 
 Projectiles.props = [
   'projectileStatus',
+  'playerStatus',
   'level',
 ];
 

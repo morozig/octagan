@@ -213,18 +213,33 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         />
       </div>
 
-      {(gameStatus.value === GameStatus.Lost ||
-        gameStatus.value === GameStatus.Won) &&
+      {gameStatus.value === GameStatus.Lost &&
         <div
-          class={'ScreenArea-dialog'}
+          class={'ScreenArea-dialog--lost'}
         >
           <div
             class={'ScreenArea-dialog-result'}
           >
-            {gameStatus.value === GameStatus.Won ?
-              'YOU WON!' :
-              'YOU LOST'
-            }
+            {'DISCRIMINATED'}
+          </div>
+          {totalScore.value ?
+            <div
+              class={'ScreenArea-dialog-score'}
+            >
+              {`Score: ${(totalScore.value * 100).toFixed(1)}%`}
+            </div> :
+            null
+          }
+        </div>
+      }
+      {gameStatus.value === GameStatus.Won &&
+        <div
+          class={'ScreenArea-dialog--won'}
+        >
+          <div
+            class={'ScreenArea-dialog-result'}
+          >
+            {'Victory!'}
           </div>
           {totalScore.value ?
             <div

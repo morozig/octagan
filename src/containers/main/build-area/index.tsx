@@ -10,6 +10,23 @@ import Gem from './Gem';
 
 const buildLocalStorageKey = 'build';
 
+export const validateBuild = (buildStr: string) => {
+  if (buildStr.length !== 64) {
+    return false;
+  }
+  for (let i = 0; i < 64; i++) {
+    const char = buildStr[i];
+    const parsed = parseInt(char, 10);
+    if (isNaN(parsed)) {
+      return false;
+    }
+    if (parsed < 0 || parsed > 7) {
+      return false;
+    }
+  }
+  return true;
+};
+
 interface BuildAreaProps {
   build: string;
   onBuildChange: (build: string) => void;
@@ -43,7 +60,7 @@ const BuildArea = defineComponent<BuildAreaProps>((props) => {
 
   const onLoadClick = () => {
     const build = localStorage.getItem(buildLocalStorageKey);
-    if (build) {
+    if (build && validateBuild(build)) {
       props.onBuildChange(build);
     }
   };

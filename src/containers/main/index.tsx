@@ -1,11 +1,15 @@
 import {
   defineComponent,
   ref,
+  onMounted,
+  watch,
 } from 'vue';
 import './Main.css';
-import BuildArea from './build-area';
+import BuildArea, { validateBuild } from './build-area';
 import ControlsArea from './controls-area';
 import ScreenArea from './screen-area';
+
+const emptyBuild = '0'.repeat(64);
 
 export enum GameStatus {
   Stopped,
@@ -18,7 +22,33 @@ export enum GameStatus {
 const Main = defineComponent(() => {
   const gameStatus = ref(GameStatus.Stopped);
   const level = ref(1);
-  const build = ref('0'.repeat(64));
+  const build = ref(emptyBuild);
+
+  onMounted(() => {
+    const params = (new URL(document.location.href)).searchParams;
+    const buildStr = params.get('build');
+    if (buildStr && validateBuild(buildStr)) {
+      build.value = buildStr;
+    } else {
+      window.history.replaceState(
+        undefined,
+        undefined,
+        window.location.origin
+      );
+    }
+  });
+
+  watch(build, (value) => {
+    const origin = window.location.origin;
+    const href = value !== emptyBuild ?
+      `${origin}/?${new URLSearchParams({build: value}).toString()}` :
+      origin;
+    window.history.replaceState(
+      undefined,
+      undefined,
+      href
+    );
+  });
 
   const onSwitch = () => {
     if (gameStatus.value === GameStatus.Running) {

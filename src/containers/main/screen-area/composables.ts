@@ -64,7 +64,7 @@ const getScore = async (build: string, level: number) => {
   const tf = await import('@tensorflow/tfjs');
   const imported = new Date().getTime();
   if (!model) {
-    const requestUrl = `${window.location}model/model.json`;
+    const requestUrl = `${window.location.origin}/model/model.json`;
     model = await tf.loadLayersModel(requestUrl);
   }
   const input = buildToInput(build, level);

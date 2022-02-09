@@ -6,9 +6,6 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "nuxt3": "latest"
-  },
-  "overrides": {
-    "chalk": "^4.1.2"
+    "nuxt3": "^3.0.0-27406801.569aaeb"
   }
 }

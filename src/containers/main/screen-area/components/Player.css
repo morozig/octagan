@@ -1,4 +1,4 @@
-.Player-color {
+.Player-center {
   stroke: #000000;
   animation-name: led;
   animation-duration: 8s;
@@ -14,4 +14,15 @@
   75%  {stop-color: #3049d6d6; }
   90%  {stop-color: #8a30d3d6; }
   to   {stop-color: #b30808d6; }
+}
+
+.Player-outer {
+  stop-color: #ffffff;
+}
+
+.Player--dead .Player-center {
+  stop-opacity: 0.1;
+}
+.Player--dead .Player-outer {
+  stop-opacity: 0.1;
 }

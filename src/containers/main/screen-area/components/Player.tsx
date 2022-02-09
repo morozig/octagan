@@ -29,12 +29,12 @@ const Player = defineComponent<PlayerProps>((props) => {
         <linearGradient
           id='linearGradient2903'>
           <stop
-            class={'Player-color'}
+            class={'Player-center'}
             offset='0'
             id='stop3842'
           />
           <stop
-            style='stop-color:#ffffff;stop-opacity:1'
+            class={'Player-outer'}
             offset='1'
             id='stop3844'
           />

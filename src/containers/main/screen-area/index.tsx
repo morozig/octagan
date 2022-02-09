@@ -116,7 +116,9 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
               ) ? 'ScreenArea-unit--negative ' : ' '
             )}
           >
-            <Player/>
+            <Player
+              isDead={!playerHealth.value}
+            />
           </div>
           <HealthBar
             health={playerHealth.value}

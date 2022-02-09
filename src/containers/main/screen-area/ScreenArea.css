@@ -10,7 +10,6 @@
   align-items: flex-end;
   gap: 20px;
   border-bottom: 8px solid #e0cebd;
-  width: 100vw;
   min-width: 1350px;
   justify-content: center;
 }

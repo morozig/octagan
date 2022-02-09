@@ -23,4 +23,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'browser'
   },
+  app: {
+    baseURL: '/octagan/'
+  },
 })

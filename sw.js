@@ -1,1 +1,1 @@
-self.importScripts("/_server/index.mjs");
+self.importScripts("/octagan/_server/index.mjs");

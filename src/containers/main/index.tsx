@@ -25,6 +25,7 @@ const Main = defineComponent(() => {
   const build = ref(emptyBuild);
 
   onMounted(() => {
+    const origin = `${window.location.origin}/octagan`;
     const params = (new URL(document.location.href)).searchParams;
     const buildStr = params.get('build');
     if (buildStr && validateBuild(buildStr)) {
@@ -33,13 +34,13 @@ const Main = defineComponent(() => {
       window.history.replaceState(
         undefined,
         undefined,
-        window.location.origin
+        origin
       );
     }
   });
 
   watch(build, (value) => {
-    const origin = window.location.origin;
+    const origin = `${window.location.origin}/octagan`;
     const href = value !== emptyBuild ?
       `${origin}/?${new URLSearchParams({build: value}).toString()}` :
       origin;

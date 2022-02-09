@@ -60,9 +60,10 @@ const buildToInput = (build: string, level: number) => {
   return input;
 };
 const getScore = async (build: string, level: number) => {
+  const origin = `${window.location.origin}/octagan`;
   let tf = (window as any).tf;
   if (!model) {
-    const requestUrl = `${window.location.origin}/model/model.json`;
+    const requestUrl = `${origin}/model/model.json`;
     model = await tf.loadLayersModel(requestUrl);
   }
   const input = buildToInput(build, level);

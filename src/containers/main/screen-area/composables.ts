@@ -2,6 +2,7 @@ import {
   watch,
   ref,
   Ref,
+  onMounted,
 } from 'vue';
 import { getBaseUrl } from '~~/src/lib/helpers';
 
@@ -37,6 +38,8 @@ export const enum ProjectileStatus {
 let scoresBuild = '';
 let scores = [] as number[];
 let model; // tf.LayersModel;
+let modelPromise;
+
 const buildToInput = (build: string, level: number) => {
   const buildArr = build
     .split('')
@@ -60,13 +63,21 @@ const buildToInput = (build: string, level: number) => {
   }
   return input;
 };
-const getScore = async (build: string, level: number) => {
+const getModel = async () => {
   const origin = getBaseUrl();
   let tf = (window as any).tf;
   if (!model) {
-    const requestUrl = `${origin}/model/model.json`;
-    model = await tf.loadLayersModel(requestUrl);
+    if (!modelPromise) {
+      const requestUrl = `${origin}/model/model.json`;
+      modelPromise = tf.loadLayersModel(requestUrl);
+    }
+    model = await modelPromise;
   }
+};
+
+const getScore = async (build: string, level: number) => {
+  let tf = (window as any).tf;
+  await getModel();
   const input = buildToInput(build, level);
   const inputsTensor = tf.tensor([input]);
   const outputsTensor = model.predict(inputsTensor);
@@ -121,6 +132,8 @@ const useFight = (options: FightOptions) => {
   const damageRecieved = ref<number>(undefined);
   const projectileStatus = ref(ProjectileStatus.Absent);
   
+  onMounted(getModel);
+
   const start = () => {
     playerHealth.value = 100;
     enemyHealth.value = 100 * level.value;
@@ -133,6 +146,7 @@ const useFight = (options: FightOptions) => {
     projectileStatus.value = ProjectileStatus.Absent;
   };
 
+  
   watch(fightStatus, (value, oldValue) => {
     const run = async () => {
       if (scoresBuild !== build.value) {

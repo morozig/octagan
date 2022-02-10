@@ -7,14 +7,14 @@ export default defineNuxtConfig({
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'description', content: 'Save Princess Attention From 8 Discriminators' },
-      { property: 'og:image', content: '/banner.png' },
+      { property: 'og:image', content: '/octagan/banner.png' },
       { property: 'og:description', content: 'Save Princess Attention From 8 Discriminators' },
       { property: 'og:title', content: 'OctaGAN' },
     ],
     link: [
-      { rel: 'icon', href: '/favicon.ico' },
-      { rel: 'apple-touch-icon', href: '/logo192.png' },
-      { rel: 'stylesheet', href: '/fonts/fonts.css' },
+      { rel: 'icon', href: '/octagan/favicon.ico' },
+      { rel: 'apple-touch-icon', href: '/octagan/logo192.png' },
+      { rel: 'stylesheet', href: '/octagan/fonts/fonts.css' },
     ],
     title: 'OctaGAN',
     script: [

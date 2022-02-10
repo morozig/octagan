@@ -8,6 +8,7 @@ import './Main.css';
 import BuildArea, { validateBuild } from './build-area';
 import ControlsArea from './controls-area';
 import ScreenArea from './screen-area';
+import { getBaseUrl } from '~~/src/lib/helpers';
 
 const emptyBuild = '0'.repeat(64);
 
@@ -25,7 +26,7 @@ const Main = defineComponent(() => {
   const build = ref(emptyBuild);
 
   onMounted(() => {
-    const origin = `${window.location.origin}/octagan`;
+    const origin = getBaseUrl();
     const params = (new URL(document.location.href)).searchParams;
     const buildStr = params.get('build');
     if (buildStr && validateBuild(buildStr)) {
@@ -40,7 +41,7 @@ const Main = defineComponent(() => {
   });
 
   watch(build, (value) => {
-    const origin = `${window.location.origin}/octagan`;
+    const origin = getBaseUrl();
     const href = value !== emptyBuild ?
       `${origin}/?${new URLSearchParams({build: value}).toString()}` :
       origin;

@@ -3,6 +3,7 @@ import {
   ref,
   Ref,
 } from 'vue';
+import { getBaseUrl } from '~~/src/lib/helpers';
 
 export const animationTimings = {
   playerSending: 50,
@@ -60,7 +61,7 @@ const buildToInput = (build: string, level: number) => {
   return input;
 };
 const getScore = async (build: string, level: number) => {
-  const origin = `${window.location.origin}/octagan`;
+  const origin = getBaseUrl();
   let tf = (window as any).tf;
   if (!model) {
     const requestUrl = `${origin}/model/model.json`;

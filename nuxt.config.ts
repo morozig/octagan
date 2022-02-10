@@ -4,7 +4,7 @@ import { defineNuxtConfig } from 'nuxt3'
 export default defineNuxtConfig({
   srcDir: 'src/',
   css: [
-    '@/app.css',
+    '@/public/fonts/fonts.css',
   ],
   meta: {
     meta: [

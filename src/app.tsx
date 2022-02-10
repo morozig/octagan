@@ -1,5 +1,4 @@
 import { defineComponent } from 'vue';
-import './App.css';
 import Main from './containers/main';
 
 

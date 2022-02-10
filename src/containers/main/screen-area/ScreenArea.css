@@ -65,7 +65,7 @@
   width: 100%;
   text-align: center;
   font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
   font-size: 24px;
 
   animation-duration: 1s;
@@ -91,7 +91,7 @@
   width: 100%;
   text-align: center;
   font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
   font-size: 24px;
   color: #ff000000;
 
@@ -129,7 +129,7 @@
   border-radius: 18px;
   color: #f2f1f5;
   text-shadow: 1px 1px 3px black;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Audiowide', cursive;
   text-align: center;
 }
 
@@ -144,7 +144,7 @@
   border-radius: 18px;
   color: #ffffff;
   text-shadow: 1px 1px 3px black;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   text-align: center;
 }

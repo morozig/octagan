@@ -119,7 +119,7 @@
 }
 
 .ScreenArea-dialog--lost {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);
@@ -134,7 +134,7 @@
 }
 
 .ScreenArea-dialog--won {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, 0);

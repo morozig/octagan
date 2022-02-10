@@ -1,0 +1,38 @@
+/* audiowide-regular - latin */
+@font-face {
+  font-family: 'Audiowide';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+       url('./audiowide-v14-latin-regular.woff2') format('woff2'),
+       url('./audiowide-v14-latin-regular.woff') format('woff');
+}
+
+/* courier-prime-regular - latin */
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+       url('./courier-prime-v5-latin-regular.woff2') format('woff2'),
+       url('./courier-prime-v5-latin-regular.woff') format('woff');
+}
+
+/* roboto-regular - latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+       url('./roboto-v29-latin-regular.woff2') format('woff2'),
+       url('./roboto-v29-latin-regular.woff') format('woff');
+}
+/* roboto-700 - latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local(''),
+       url('./roboto-v29-latin-700.woff2') format('woff2'),
+       url('./roboto-v29-latin-700.woff') format('woff');
+}

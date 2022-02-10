@@ -1,6 +1,6 @@
 {
   "../node_modules/nuxt3/dist/app/entry.mjs": {
-    "file": "entry-fbd1c4e3.mjs",
+    "file": "entry-1e98a31e.mjs",
     "src": "../node_modules/nuxt3/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
@@ -8,11 +8,21 @@
     ]
   },
   "../node_modules/nuxt3/dist/app/bootstrap.mjs": {
-    "file": "bootstrap-6ee82d9c.mjs",
+    "file": "bootstrap-2e180d9b.mjs",
     "src": "../node_modules/nuxt3/dist/app/bootstrap.mjs",
     "isDynamicEntry": true,
     "css": [
-      "bootstrap.18cb1605.css"
+      "bootstrap.164bf9ae.css"
+    ],
+    "assets": [
+      "audiowide-v14-latin-regular.e21fd195.woff2",
+      "audiowide-v14-latin-regular.7234b48b.woff",
+      "courier-prime-v5-latin-regular.cb8761bf.woff2",
+      "courier-prime-v5-latin-regular.36838e60.woff",
+      "roboto-v29-latin-regular.cc46322d.woff2",
+      "roboto-v29-latin-regular.ea50ac7f.woff",
+      "roboto-v29-latin-700.0eaeadb5.woff2",
+      "roboto-v29-latin-700.a01a632e.woff"
     ]
   }
 }

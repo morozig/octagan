@@ -64,7 +64,8 @@
 .ScreenArea-unit-damage {
   width: 100%;
   text-align: center;
-  font-family: 'Courier Prime', monospace;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
   font-size: 24px;
 
   animation-duration: 1s;
@@ -89,7 +90,8 @@
 .ScreenArea-unit-damagerecieved {
   width: 100%;
   text-align: center;
-  font-family: 'Courier Prime', monospace;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
   font-size: 24px;
   color: #ff000000;
 

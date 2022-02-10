@@ -19,6 +19,5 @@
   left: 50%;
   transform: translate(-50%, 0);
   text-align: center;
-  font-weight: bold;
-  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
+  font-family: 'Courier Prime', monospace;
 }

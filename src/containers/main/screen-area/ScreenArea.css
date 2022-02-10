@@ -156,3 +156,18 @@
 .ScreenArea-dialog-score {
   font-size: 24px;
 }
+
+.ScreenArea-preload {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+}
+
+.ScreenArea-preload-lost {
+  font-family: 'Audiowide';
+}
+.ScreenArea-preload-won {
+  font-family: 'Roboto';
+}

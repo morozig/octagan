@@ -257,6 +257,22 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
             }
           </div>
         }
+        {gameStatus.value === GameStatus.Stopped &&
+          <div
+            class={'ScreenArea-preload'}
+          >
+            <span
+              class={'ScreenArea-preload-lost'}
+            >
+              {'Load'}
+            </span>
+            <span
+              class={'ScreenArea-preload-won'}
+            >
+              {'ing'}
+            </span>
+          </div>
+        }
       </div>
     </div>
   );

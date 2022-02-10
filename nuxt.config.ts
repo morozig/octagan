@@ -3,9 +3,6 @@ import { defineNuxtConfig } from 'nuxt3'
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
   srcDir: 'src/',
-  css: [
-    '@/public/fonts/fonts.css',
-  ],
   meta: {
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -17,6 +14,7 @@ export default defineNuxtConfig({
     link: [
       { rel: 'icon', href: '/favicon.ico' },
       { rel: 'apple-touch-icon', href: '/logo192.png' },
+      { rel: 'stylesheet', href: '/fonts/fonts.css' },
     ],
     title: 'OctaGAN',
     script: [

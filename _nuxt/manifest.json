@@ -12,7 +12,7 @@
     "src": "../node_modules/nuxt3/dist/app/bootstrap.mjs",
     "isDynamicEntry": true,
     "css": [
-      "bootstrap.8e54e5b2.css"
+      "bootstrap.e3b1fb90.css"
     ]
   }
 }

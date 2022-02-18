@@ -171,3 +171,21 @@
 .ScreenArea-preload-won {
   font-family: 'Roboto';
 }
+
+@media (max-width: 768px) {
+  .ScreenArea-dialog--lost {
+    padding: 10px 2px;
+  }
+
+  .ScreenArea-dialog--won {
+    padding: 10px 2px;
+  }
+
+  .ScreenArea-dialog-result {
+    font-size: 26px;
+  }
+  
+  .ScreenArea-dialog-score {
+    font-size: 20px;
+  }
+}

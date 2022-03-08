@@ -10,25 +10,70 @@ import './Projectiles.css';
 
 interface ProjectilesProps {
   projectileStatus: ProjectileStatus;
+  isMissing: boolean;
   playerStatus: UnitStatus;
+  enemyStatus: UnitStatus;
   level: number;
+  isSoundOn: boolean;
 }
 
 const Projectiles = defineComponent<ProjectilesProps>((props) => {
   const {
     projectileStatus,
+    isMissing,
     playerStatus,
+    enemyStatus,
     level,
+    isSoundOn,
   } = toRefs(props);
 
   const isLaserFlying = ref(false);
 
+  const playerSoundRef = ref<HTMLAudioElement>();
+  const enemyHitSoundRef = ref<HTMLAudioElement>();
+  const enemyMissSoundRef = ref<HTMLAudioElement>();
+
   watch(
-    [projectileStatus, playerStatus],
-    ([ projectileValue, playerValue ]) => {
+    [ projectileStatus, playerStatus, enemyStatus ],
+    ([ projectileValue, playerValue, enemyValue ]) => {
       isLaserFlying.value =
         projectileValue === ProjectileStatus.FlyingFromEnemy ||
         playerValue === UnitStatus.Recieving;
+      if (playerValue === UnitStatus.Sending) {
+        if (playerSoundRef.value) {
+          playerSoundRef.value.currentTime = 0;
+          playerSoundRef.value.play();
+        }
+      }
+      if (enemyValue === UnitStatus.Sending) {
+        if (isMissing.value) {
+          if (enemyMissSoundRef.value) {
+            enemyMissSoundRef.value.currentTime = 0;
+            enemyMissSoundRef.value.play();
+          }
+        } else {
+          if (enemyHitSoundRef.value) {
+            enemyHitSoundRef.value.currentTime = 0;
+            enemyHitSoundRef.value.play();
+          }
+        }
+      }
+
+      if (
+        projectileValue === ProjectileStatus.Absent &&
+        playerValue === UnitStatus.Idle &&
+        enemyValue === UnitStatus.Idle
+      ) {
+        if (playerSoundRef.value) {
+          playerSoundRef.value.pause();
+        }
+        if (enemyMissSoundRef.value) {
+          enemyMissSoundRef.value.pause();
+        }
+        if (enemyHitSoundRef.value) {
+          enemyHitSoundRef.value.pause();
+        }
+      }
     }
   );
 
@@ -60,9 +105,27 @@ const Projectiles = defineComponent<ProjectilesProps>((props) => {
               'Projectiles-area-plasma--flying ' : ' '
           )}
         />
+        {isSoundOn.value &&
+          <audio
+            src={'/sound/player.mp3'}
+            ref={playerSoundRef}
+          />
+        }
         <div
           class={laserClassName.value}
         />
+        {isSoundOn.value &&
+          <audio
+            src={'/sound/enemyHit.mp3'}
+            ref={enemyHitSoundRef}
+          />
+        }
+        {isSoundOn.value &&
+          <audio
+            src={'/sound/enemyMiss.mp3'}
+            ref={enemyMissSoundRef}
+          />
+        }
       </div>
     </div>
   );
@@ -70,8 +133,11 @@ const Projectiles = defineComponent<ProjectilesProps>((props) => {
 
 Projectiles.props = [
   'projectileStatus',
+  'isMissing',
   'playerStatus',
+  'enemyStatus',
   'level',
+  'isSoundOn',
 ];
 
 export default Projectiles;

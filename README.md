@@ -9,7 +9,7 @@ Play in your browser [here](https://morozig.github.io/octagan/)
 ## Combat Mechanics
 - **Player Damage** = 1..20 + *Bonus*
 - **Player Damage Block** = *Bonus*
-- **Enemy Damage** = 1..20 * *l*
+- **Enemy Damage** = *l*..20 * *l*
 - *Bonus* = round(*S<sub>l</sub>* * 20 * *l*)
 - *l* = 1..8 - current level
 - *S<sub>l</sub>* = 0..1 - current similarity(read details below)

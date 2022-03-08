@@ -89,7 +89,7 @@ const Main = defineComponent(() => {
         build={build.value}
       />
       <div
-        class={'Main-controls'}
+        class={'Main-sections'}
       >
         <ControlsArea
           gameStatus={gameStatus.value}

@@ -13,6 +13,7 @@ export const animationTimings = {
   enemyRecieving: 1100,
   playerProjectileFlying: 900,
   enemyProjectileFlying: 350,
+  modelLeaving: 500,
 };
 
 export const enum UnitStatus {
@@ -34,6 +35,15 @@ export const enum ProjectileStatus {
   FlyingFromPlayer,
   FlyingFromEnemy,
 }
+
+export const enum ModelStatus {
+  Idle,
+  Loading,
+  Leaving,
+  Ready,
+}
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 let scoresBuild = '';
 let scores = [] as number[];
@@ -102,7 +112,9 @@ const getPlayerDamageRecieved = (damage: number, level: number) => {
   return damageRecieved;
 };
 const getEnemyDamageSent = (level: number) => {
-  const damage = level * Math.ceil(Math.random() * 20);
+  const damage = level * (
+    level + Math.floor(Math.random() * (20 - level + 1))
+  );
   return damage;
 };
 const getEnemyDamageRecieved = (damage: number, level: number) => {
@@ -131,11 +143,18 @@ const useFight = (options: FightOptions) => {
   const damageSent = ref<number>(undefined);
   const damageRecieved = ref<number>(undefined);
   const projectileStatus = ref(ProjectileStatus.Absent);
+  const isMissing = ref(false);
+  const modelStatus = ref(ModelStatus.Idle);
   
-  onMounted(getModel);
+  onMounted(async () => {
+    modelStatus.value = ModelStatus.Loading;
+    await getScore(build.value, 1);
+    modelStatus.value = ModelStatus.Leaving;
+    await sleep(animationTimings.modelLeaving);
+    modelStatus.value = ModelStatus.Ready;
+  });
 
   const start = () => {
-    playerHealth.value = 100;
     enemyHealth.value = 100 * level.value;
     fightStatus.value = FightStatus.Started;
   };
@@ -144,6 +163,7 @@ const useFight = (options: FightOptions) => {
     playerStatus.value = UnitStatus.Idle;
     enemyStatus.value = UnitStatus.Idle;
     projectileStatus.value = ProjectileStatus.Absent;
+    isMissing.value = false;
   };
 
   
@@ -227,15 +247,22 @@ const useFight = (options: FightOptions) => {
         break;
       }
       case (UnitStatus.Sending): {
+        const willSend = getEnemyDamageSent(level.value);
+        const willRecieve = getPlayerDamageRecieved(
+          willSend,
+          level.value
+        );
+        const willMiss = willRecieve <= 0;
+        isMissing.value = willMiss;
         timerHandle = setTimeout(() => {
           enemyStatus.value = UnitStatus.Idle;
           projectileStatus.value = ProjectileStatus.FlyingFromEnemy;
-          damageSent.value = getEnemyDamageSent(level.value);
+          damageSent.value = willSend;
+          isMissing.value = false;
         }, animationTimings.enemySending);
         break;
       }
       case (UnitStatus.Dead): {
-        playerHealth.value = 100;
         fightStatus.value = FightStatus.Finished;
         break;
       }
@@ -290,11 +317,13 @@ const useFight = (options: FightOptions) => {
     playerStatus,
     enemyStatus,
     projectileStatus,
+    isMissing,
     playerHealth,
     enemyHealth,
     damageSent,
     damageRecieved,
     totalScore,
+    modelStatus,
     start,
     stop,
   };

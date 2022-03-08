@@ -1,0 +1,27 @@
+.SoundButton {
+  width: 40px;
+  height: 40px;
+  background-color: #514c55;
+  border: 2px solid #422800;
+  border-radius: 8px;
+  box-shadow: #422800 4px 4px 0 0;
+  transform: translate(-3px, -3px);
+  cursor: pointer;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}
+
+.SoundButton * {
+  fill: #fbeee0;
+}
+
+.SoundButton--on {
+  background-color: #fbeee0;
+  box-shadow: #422800 3px 3px 0 0;
+  transform: translate(-2px, -2px);
+}
+
+.SoundButton--on * {
+  fill: #422800;
+}

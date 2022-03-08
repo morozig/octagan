@@ -7,6 +7,7 @@ import {
 import { GameStatus } from '..';
 import {
   FightStatus,
+  ModelStatus,
   ProjectileStatus,
   UnitStatus,
   useFight
@@ -17,6 +18,7 @@ import Princess from './components/Princess';
 import Projectiles from './components/Projectiles';
 import './ScreenArea.css';
 import HealthBar from './components/HealthBar';
+import SoundButton from './components/SoundButton';
 
 interface ScreenAreaProps {
   gameStatus: GameStatus;
@@ -33,17 +35,23 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
   } = toRefs(props);
 
   const level = ref(1);
+  const isSoundOn = ref(false);
+  const onSoundToggle = () => isSoundOn.value = !isSoundOn.value;
+  const backgroundSoundRef = ref<HTMLAudioElement>();
+  const lostSoundRef = ref<HTMLAudioElement>();
 
   const {
     fightStatus,
     playerStatus,
     enemyStatus,
     projectileStatus,
+    isMissing,
     playerHealth,
     enemyHealth,
     damageSent,
     damageRecieved,
     totalScore,
+    modelStatus,
     start,
     stop,
   } = useFight({
@@ -65,6 +73,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         break;
       }
       case (GameStatus.Running): {
+        playerHealth.value = 100;
         if (
           oldValue === GameStatus.Won
         ) {
@@ -93,6 +102,43 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
 
   watch(level, props.onLevelChange);
 
+  watch(gameStatus, (value, oldValue) => {
+    if (!backgroundSoundRef.value ||
+      !lostSoundRef.value
+    ) {
+      return;
+    }
+    switch (value) {
+      case (GameStatus.Stopped): {
+        backgroundSoundRef.value.pause();
+        backgroundSoundRef.value.currentTime = 0;
+        lostSoundRef.value.pause();
+        break;
+      }
+      case (GameStatus.Paused): {
+        backgroundSoundRef.value.pause();
+        lostSoundRef.value.pause();
+        break;
+      }
+      case (GameStatus.Running): {
+        if (
+          oldValue !== GameStatus.Running
+        ) {
+          backgroundSoundRef.value.currentTime = 0;
+          backgroundSoundRef.value.play();
+        }
+        break;
+      }
+      case (GameStatus.Lost): {
+        backgroundSoundRef.value.pause();
+        backgroundSoundRef.value.currentTime = 0;
+        lostSoundRef.value.currentTime = 0;
+        lostSoundRef.value.play();
+        break;
+      }
+    }
+  });
+
   // watch([
   //   fightStatus,
   //   playerHealth,
@@ -106,7 +152,10 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         class={'ScreenArea-inner'}
       >
         <div
-          class={'ScreenArea-unit'}
+          class={'ScreenArea-unit '.concat(
+            'ScreenArea-inner-firstUnit'
+          )
+        }
         >
           <div
             class={'ScreenArea-unit-fighter '.concat(
@@ -147,8 +196,11 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         {gameStatus.value !== GameStatus.Won &&
           <Projectiles
             projectileStatus={projectileStatus.value}
+            isMissing={isMissing.value}
             playerStatus={playerStatus.value}
+            enemyStatus={enemyStatus.value}
             level={level.value}
+            isSoundOn={isSoundOn.value}
           />
         }
 
@@ -209,7 +261,9 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
           />
         }
         <div
-          class={'ScreenArea-unit '}
+          class={'ScreenArea-unit '.concat(
+            'ScreenArea-inner-lastUnit'
+          )}
         >
           <Princess/>
           <HealthBar
@@ -219,6 +273,48 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
           />
         </div>
 
+        <SoundButton
+          isOn={isSoundOn.value}
+          onToggle={onSoundToggle}
+          class={'ScreenArea-soundButton'}
+        />
+        {isSoundOn.value &&
+          <audio
+            src={'/sound/background.mp3'}
+            autoplay={
+              gameStatus.value === GameStatus.Running ||
+              gameStatus.value === GameStatus.Won
+            }
+            loop={
+              gameStatus.value === GameStatus.Running ||
+              gameStatus.value === GameStatus.Won
+            }
+            ref={backgroundSoundRef}
+          />
+        }
+        {isSoundOn.value &&
+          <audio
+            src={'/sound/lost.mp3'}
+            ref={lostSoundRef}
+          />
+        }
+
+        {modelStatus.value === ModelStatus.Loading &&
+          <div
+            class={'ScreenArea-loadingModel'}
+          >
+            {'Loading model...'}
+          </div>
+        }
+        {modelStatus.value === ModelStatus.Leaving &&
+          <div
+            class={'ScreenArea-loadingModel '.concat(
+              'ScreenArea-loadingModel--leaving'
+            )}
+          >
+            {'Loading model...'}
+          </div>
+        }
         {gameStatus.value === GameStatus.Lost &&
           <div
             class={'ScreenArea-dialog--lost'}

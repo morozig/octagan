@@ -1,17 +1,23 @@
 .ScreenArea {
   overflow-x: auto;
   margin: 0 0 20px 0;
+  background: linear-gradient(to top right, #5668a3, #3f87a6, #75f8f8);
 }
 
 .ScreenArea-inner {
   height:250px;
-  background: linear-gradient(to top right, #5668a3, #3f87a6, #75f8f8);
   display: flex;
   align-items: flex-end;
   gap: 20px;
   border-bottom: 8px solid #e0cebd;
-  min-width: 1350px;
-  justify-content: center;
+}
+
+.ScreenArea-inner-firstUnit {
+  margin-left: auto;
+}
+
+.ScreenArea-inner-lastUnit {
+  margin-right: auto;
 }
 
 .ScreenArea-unit {
@@ -118,6 +124,41 @@
   flex: 0 1 50px;
 }
 
+.ScreenArea-soundButton {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+
+.ScreenArea-loadingModel {
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  text-align: center;
+  color: #fffc5f;
+  text-shadow: 1px 1px 5px #000000;
+}
+
+.ScreenArea-loadingModel--leaving {
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-name: loadingModel;
+}
+
+@keyframes loadingModel {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .ScreenArea-dialog--lost {
   position: absolute;
   top: 0;
@@ -170,6 +211,7 @@
 }
 .ScreenArea-preload-won {
   font-family: 'Roboto';
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {

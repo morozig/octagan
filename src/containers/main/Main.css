@@ -3,13 +3,13 @@ main {
   min-height: 100vh;
 }
 
-.Main-controls {
+.Main-sections {
   display: grid;
   justify-content: center;
   gap: 20px;
 }
 
-.Main-controls > * {
+.Main-sections > * {
   background-color: #8081ff;
   border: 4px solid thistle;
   border-radius: 18px;

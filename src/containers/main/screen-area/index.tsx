@@ -19,6 +19,7 @@ import Projectiles from './components/Projectiles';
 import './ScreenArea.css';
 import HealthBar from './components/HealthBar';
 import SoundButton from './components/SoundButton';
+import { getBaseUrl } from '~~/src/lib/helpers';
 
 interface ScreenAreaProps {
   gameStatus: GameStatus;
@@ -39,6 +40,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
   const onSoundToggle = () => isSoundOn.value = !isSoundOn.value;
   const backgroundSoundRef = ref<HTMLAudioElement>();
   const lostSoundRef = ref<HTMLAudioElement>();
+  const origin = getBaseUrl();
 
   const {
     fightStatus,
@@ -280,7 +282,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         />
         {isSoundOn.value &&
           <audio
-            src={'/sound/background.mp3'}
+            src={`${origin}/sound/background.mp3`}
             autoplay={
               gameStatus.value === GameStatus.Running ||
               gameStatus.value === GameStatus.Won
@@ -294,7 +296,7 @@ const ScreenArea = defineComponent<ScreenAreaProps>((props) => {
         }
         {isSoundOn.value &&
           <audio
-            src={'/sound/lost.mp3'}
+            src={`${origin}/sound/lost.mp3`}
             ref={lostSoundRef}
           />
         }

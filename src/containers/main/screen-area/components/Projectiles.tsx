@@ -7,6 +7,7 @@ import {
 } from 'vue';
 import { ProjectileStatus, UnitStatus } from '../composables';
 import './Projectiles.css';
+import { getBaseUrl } from '~~/src/lib/helpers';
 
 interface ProjectilesProps {
   projectileStatus: ProjectileStatus;
@@ -32,6 +33,7 @@ const Projectiles = defineComponent<ProjectilesProps>((props) => {
   const playerSoundRef = ref<HTMLAudioElement>();
   const enemyHitSoundRef = ref<HTMLAudioElement>();
   const enemyMissSoundRef = ref<HTMLAudioElement>();
+  const origin = getBaseUrl();
 
   watch(
     [ projectileStatus, playerStatus, enemyStatus ],
@@ -107,7 +109,7 @@ const Projectiles = defineComponent<ProjectilesProps>((props) => {
         />
         {isSoundOn.value &&
           <audio
-            src={'/sound/player.mp3'}
+            src={`${origin}/sound/player.mp3`}
             ref={playerSoundRef}
           />
         }
@@ -116,13 +118,13 @@ const Projectiles = defineComponent<ProjectilesProps>((props) => {
         />
         {isSoundOn.value &&
           <audio
-            src={'/sound/enemyHit.mp3'}
+            src={`${origin}/sound/enemyHit.mp3`}
             ref={enemyHitSoundRef}
           />
         }
         {isSoundOn.value &&
           <audio
-            src={'/sound/enemyMiss.mp3'}
+            src={`${origin}/sound/enemyMiss.mp3`}
             ref={enemyMissSoundRef}
           />
         }

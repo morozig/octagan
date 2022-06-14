@@ -1,1 +1,0 @@
-self.importScripts("/octagan/_server/index.mjs");

@@ -1,18 +1,10 @@
 {
-  "../node_modules/nuxt3/dist/app/entry.mjs": {
-    "file": "entry-70984af0.mjs",
-    "src": "../node_modules/nuxt3/dist/app/entry.mjs",
+  "../node_modules/nuxt/dist/app/entry.mjs": {
+    "file": "entry-669c275e.mjs",
+    "src": "../node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
-    "dynamicImports": [
-      "../node_modules/nuxt3/dist/app/bootstrap.mjs"
-    ]
-  },
-  "../node_modules/nuxt3/dist/app/bootstrap.mjs": {
-    "file": "bootstrap-6d8a5ef4.mjs",
-    "src": "../node_modules/nuxt3/dist/app/bootstrap.mjs",
-    "isDynamicEntry": true,
     "css": [
-      "bootstrap.c02c91f1.css"
+      "entry.69a4cdfd.css"
     ]
   }
 }

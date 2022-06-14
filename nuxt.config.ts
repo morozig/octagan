@@ -1,4 +1,4 @@
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -20,9 +20,6 @@ export default defineNuxtConfig({
     script: [
       { src: 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.13.0/dist/tf.min.js' }
     ],
-  },
-  nitro: {
-    preset: 'browser'
   },
   app: {
     baseURL: '/octagan/'
